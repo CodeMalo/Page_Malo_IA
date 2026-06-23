@@ -1,7 +1,7 @@
 ---
 title: What is an AI agent (in plain words)
 date: 2026-06-18
-status: published
+status: draft
 cover_topic: friendly robot assistant organizing tasks on a desk, cozy
 sources:
   - https://www.anthropic.com/research

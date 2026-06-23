@@ -1,7 +1,7 @@
 ---
 title: AI doesn't bite (I promise)
 date: 2026-06-20
-status: published
+status: draft
 cover_topic: nervous person at the computer, friendly AI, humor
 video_url: https://www.tiktok.com/@malocode.ia
 platforms:

@@ -1,7 +1,7 @@
 ---
 title: Beginner's prompt guide for AI
 date: 2026-06-21
-status: published
+status: draft
 cover_topic: simple prompts for beginners, notebook and pencil
 file: guia.pdf
 sources:

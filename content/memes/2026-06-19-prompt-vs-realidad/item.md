@@ -1,7 +1,7 @@
 ---
 title: Perfect prompt vs. what you type at 2am
 date: 2026-06-19
-status: published
+status: draft
 cover_topic: funny comparison, expectation vs reality, desk at night
 video_url: https://www.instagram.com/ia_malo
 platforms:
