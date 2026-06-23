@@ -1,0 +1,6 @@
+# Motor de malo-ia-site
+# MOCK (probar sin keys) solo necesita Pillow:
+Pillow>=10.0.0
+# Modo real (MALO_REAL=1) agrega:
+anthropic>=0.39.0
+google-genai>=0.3.0

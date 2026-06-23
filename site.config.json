@@ -1,0 +1,23 @@
+{
+  "brand": "malo_ia",
+  "tagline": "AI, explained by a friend who already figured it out.",
+  "base_url": "",
+  "lead": {
+    "free_guide_url": "https://YOUR-FREE-GUIDE-LINK",
+    "bio_link_url": "https://YOUR-LINK-IN-BIO",
+    "cta_text": "Get the free guide"
+  },
+  "social": {
+    "instagram": "https://www.instagram.com/ia_malo",
+    "youtube": "https://youtube.com/@ia_malo",
+    "tiktok": "https://www.tiktok.com/@malocode.ia",
+    "facebook": "https://www.facebook.com/profile.php?id=61577255432362"
+  },
+  "sections": {
+    "guias": { "label": "Guides & templates", "page": "guias.html" },
+    "memes": { "label": "Videos & memes", "page": "memes.html" },
+    "blog":  { "label": "Blog", "page": "blog.html" }
+  },
+  "carousel": { "title": "What's new", "max_items": 8 },
+  "analytics": { "ga4_id": "G-9X4W5XDK38" }
+}

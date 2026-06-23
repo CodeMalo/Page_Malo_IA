@@ -1,0 +1,16 @@
+# Nunca subir keys ni secretos
+.env
+*.key
+secrets.*
+
+# Cache de Python y fuentes que se bajan solas
+__pycache__/
+*.pyc
+tools/_fonts/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# NOTA: la carpeta public/ SÍ se sube (es lo que sirve GitHub Pages:
+# content.json, las portadas generadas y los archivos de las guías).

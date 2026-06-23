@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malo IA — AI explained by a friend</title>
+<meta name="description" content="AI explained calmly, no jargon, no hype. For business owners who feel left behind by AI.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="app.css">
+
+<!-- ════════════════════════════════════════════════════════════════
+     FOR THE 3D HERO (Spline · code window):
+     1) Uncomment the spline-viewer line below.
+     2) In the hero, paste your <spline-viewer url="YOUR_LINK"></spline-viewer>
+        inside #hero-stage and delete the two fallback <img> tags.
+     ════════════════════════════════════════════════════════════════ -->
+<!-- <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.48/build/spline-viewer.js"></script> -->
+</head>
+<body data-view="home">
+
+<!-- ░░░░░░░░░░░░░░░░░░░░  NAV  ░░░░░░░░░░░░░░░░░░░░ -->
+<nav class="topnav">
+  <a class="topnav__brand" href="index.html">malo_ia</a>
+  <a class="topnav__link" href="#whats-new">What's new</a>
+  <a class="topnav__link" href="guias.html">Guides</a>
+  <a class="topnav__link" href="memes.html">Videos</a>
+  <a class="topnav__link" href="blog.html">Blog</a>
+</nav>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░  S1 · HERO  ░░░░░░░░░░░░░░░░░░░░ -->
+<header class="hero" id="s1">
+  <div class="wrap">
+    <p class="brandmark">malo_ia</p>
+
+    <div class="editor" data-anim="hero-editor">
+      <div class="editor__bar">
+        <span class="dot dot--orange"></span>
+        <span class="dot dot--blue"></span>
+        <span class="dot dot--yellow"></span>
+        <span class="editor__tab">malo_ia.app</span>
+        <span class="editor__status">live</span>
+      </div>
+
+      <!-- VIEWPORT: Spline goes here; fallback images meanwhile -->
+      <div class="editor__stage" id="hero-stage">
+        <!-- <spline-viewer url="YOUR_SPLINE_LINK"></spline-viewer> -->
+        <img class="stage__bg" src="assets/s1_hero_bg_16x9.png" alt="" loading="eager" decoding="async">
+        <img class="stage__bix" src="assets/s1_bix_16x9.png" alt="BIX, the Malo IA character" loading="eager" decoding="async">
+        <span class="stage__comment">// AI doesn't have to be hard</span>
+      </div>
+    </div>
+
+    <h1 class="hero__title" data-anim="up">AI, explained by a friend who already figured it out.</h1>
+    <p class="hero__sub" data-anim="up">A space to learn AI for real — guides, prompts, skills, projects, news, even memes.</p>
+    <div class="hero__cue" aria-hidden="true">scroll<span>↓</span></div>
+  </div>
+</header>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░  S2 · THE NOISE  ░░░░░░░░░░░░░░░░░░░░ -->
+<section class="scene scene--noise" id="s2">
+  <div class="layers" data-pin="noise">
+    <img class="layer layer--bg" data-depth="bg" src="assets/s2_noise_warm.png" alt="" loading="lazy" decoding="async">
+    <img class="layer layer--char" data-depth="char" src="assets/s2_bix_small_16x9.png" alt="BIX, small against the noise" loading="lazy" decoding="async">
+    <div class="copy copy--center">
+      <p class="eyebrow">02 — the noise</p>
+      <h2 class="headline">AI is a whole lot of noise.</h2>
+      <p class="lede">A thousand tools, a thousand promises, a thousand tutorials. Feeling lost is normal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░  S3 · I'VE GOT YOU  ░░░░░░░░░░░░░░░░░░░░ -->
+<section class="scene scene--order" id="s3">
+  <img class="scene__bg" data-parallax src="assets/s3_order_bg_16x9.png" alt="" loading="lazy" decoding="async">
+  <div class="wrap scene__inner">
+    <img class="figure figure--right" data-anim="up" src="assets/s3_bix_hand_16x9.png" alt="BIX reaching out a hand" loading="lazy" decoding="async">
+    <div class="copy">
+      <p class="eyebrow">03 — i've got you</p>
+      <h2 class="headline">This is where I come in.</h2>
+      <p class="lede">I'll walk you through it calmly, in your words. No weird terms, no pressure.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░  S4 · WHAT YOU LEARN  ░░░░░░░░░░░░░░░░░░░░ -->
+<section class="scene scene--value" id="s4">
+  <img class="scene__bg" data-parallax src="assets/s4_studio_bg_16x9.png" alt="" loading="lazy" decoding="async">
+  <div class="value__head wrap">
+    <div class="value__intro">
+      <p class="eyebrow">04 — what you learn</p>
+      <h2 class="headline">Things you'll actually use.</h2>
+      <p class="lede">No theory dumps — just the handful of moves that change how you work with AI every day. Swipe through →</p>
+    </div>
+    <img class="value__bix" data-anim="up" src="assets/s4_bix_present_16x9.png" alt="BIX presenting what you'll learn" loading="lazy" decoding="async">
+  </div>
+  <div class="rail" data-rail>
+    <div class="rail__track" data-track>
+      <article class="card">
+        <img src="assets/s4_card_chat_16x9.png" alt="" loading="lazy" decoding="async">
+        <h3>Chatting</h3>
+        <p>Ask for what you need, like you're talking to someone.</p>
+      </article>
+      <article class="card">
+        <img src="assets/s4_card_skills_16x9.png" alt="" loading="lazy" decoding="async">
+        <h3>Skills</h3>
+        <p>Ready-made pieces that teach it specific tasks.</p>
+      </article>
+      <article class="card">
+        <img src="assets/s4_card_prompting_16x9.png" alt="" loading="lazy" decoding="async">
+        <h3>Prompts</h3>
+        <p>How to ask well so it comes out right the first time.</p>
+      </article>
+      <article class="card">
+        <img src="assets/s4_card_projects_16x9.png" alt="" loading="lazy" decoding="async">
+        <h3>Projects</h3>
+        <p>A place where AI remembers what you're working on.</p>
+      </article>
+      <article class="card card--bix">
+        <img src="assets/s4_bix_present_16x9.png" alt="BIX presenting">
+        <h3>…and I guide you.</h3>
+        <p>Step by step, at your pace.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░  S5 · THE SHIFT  ░░░░░░░░░░░░░░░░░░░░ -->
+<section class="scene scene--shift" id="s5">
+  <div class="wrap scene__inner scene__inner--center">
+    <p class="eyebrow">05 — the shift</p>
+    <h2 class="headline">From lost to capable.</h2>
+    <div class="beforeafter" data-beforeafter>
+      <img class="ba ba--before" src="assets/s5_before_16x9.png" alt="Before: overwhelmed by AI" loading="lazy" decoding="async">
+      <img class="ba ba--after" src="assets/s5_after_with_bix_16x9.png" alt="After: capable, with BIX alongside" loading="lazy" decoding="async">
+      <span class="ba__tag ba__tag--before">before</span>
+      <span class="ba__tag ba__tag--after">after</span>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░  CONTENIDO DINÁMICO (lo arma app.js desde content.json)  ░░░░░░░░░░░░░░░░░░░░ -->
+<section class="section" id="whats-new" data-fallback>
+  <div class="section__head">
+    <p class="section__eyebrow">fresh out</p>
+    <h2 class="section__title">What's new</h2>
+  </div>
+  <div id="malo-carousel" class="reveal"></div>
+</section>
+
+<div id="malo-previews"></div>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░  S6 · YOUR TURN  ░░░░░░░░░░░░░░░░░░░░ -->
+<footer class="scene scene--cta" id="s6">
+  <img class="scene__bg" data-parallax src="assets/s6_closing_bg_16x9.png" alt="" loading="lazy" decoding="async">
+  <div class="wrap scene__inner scene__inner--center">
+    <img class="figure figure--wave" data-anim="up" src="assets/s6_bix_wave_16x9.png" alt="BIX waving goodbye" loading="lazy" decoding="async">
+    <p class="eyebrow">06 — your turn</p>
+    <h2 class="headline">Shall we start?</h2>
+    <p class="lede">I'll walk with you, one video at a time.</p>
+    <nav class="cta-sections" aria-label="Explore the site" data-anim="up">
+      <a class="btn btn--primary" href="guias.html">Guides &amp; templates</a>
+      <a class="btn btn--primary" href="memes.html">Videos &amp; memes</a>
+      <a class="btn btn--primary" href="blog.html">Blog</a>
+    </nav>
+    <p class="social__label" data-anim="up">find me here</p>
+    <nav class="social" aria-label="Social links" data-anim="up">
+      <a class="social__link" href="https://www.instagram.com/ia_malo" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a class="social__link" href="https://youtube.com/@ia_malo" target="_blank" rel="noopener noreferrer">YouTube</a>
+      <a class="social__link" href="https://www.tiktok.com/@malocode.ia" target="_blank" rel="noopener noreferrer">TikTok</a>
+      <a class="social__link" href="https://www.facebook.com/profile.php?id=61577255432362" target="_blank" rel="noopener noreferrer">Facebook</a>
+    </nav>
+    <p class="signoff">malo_ia · made with care</p>
+  </div>
+</footer>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="main.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

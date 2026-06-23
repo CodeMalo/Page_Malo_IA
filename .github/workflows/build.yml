@@ -1,0 +1,46 @@
+# ════════════════════════════════════════════════════════════════
+# OPCIONAL — generar todo en la nube al hacer push.
+# Por defecto NO hace falta: vos corrés `python tools/build.py` local y
+# subís la carpeta public/ ya generada. Esto es para cuando quieras que el
+# robot genere las portadas y textos solo.
+#
+# Para activarlo:
+#   1) En GitHub: Settings → Secrets and variables → Actions → New secret
+#      GEMINI_API_KEY  y  ANTHROPIC_API_KEY
+#   2) Settings → Actions → General → Workflow permissions → Read and write
+#   3) Borrá la línea `if: false` de abajo.
+# ════════════════════════════════════════════════════════════════
+name: build-content
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ "content/**", "site.config.json", "tools/**" ]
+
+jobs:
+  build:
+    if: false   # ← borrá esta línea para activar el modo nube
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+
+      - name: Instalar dependencias
+        run: pip install -r tools/requirements.txt
+
+      - name: Generar contenido (Claude + Gemini)
+        env:
+          MALO_REAL: "1"
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python tools/build.py
+
+      - name: Commitear lo generado
+        run: |
+          git config user.name  "malo_ia bot"
+          git config user.email "bot@malo-ia.local"
+          git add public/
+          git commit -m "build: contenido generado" || echo "nada nuevo"
+          git push

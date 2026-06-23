@@ -1,0 +1,291 @@
+/* ════════════════════════════════════════════════════════════════
+   malo_ia — componentes de contenido (carrusel + secciones + nav)
+   Usa las mismas variables que styles.css (:root). Responsive y con
+   la misma vibra cálida de la landing.
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Ajustes a la landing ──────────────────────────────────────────────────
+   1) En las escenas centradas, el título y el lede comparten el mismo eje
+      (sin margin auto, el lede quedaba corrido a la izquierda).
+   2) S2 ahora es cálida: el eyebrow gris-azulado se perdía → tono cálido legible. */
+.scene--noise .headline, .scene--noise .lede,
+.scene__inner--center .headline, .scene__inner--center .lede{ margin-inline:auto; }
+.scene--noise .eyebrow{ color:#f3ead9; }
+
+/* 3) S4 'what you learn': llenar el hueco entre el titulo y las tarjetas con
+      una linea de apoyo + BIX presentando (flota suave), y subir las cards. */
+.value__head{ display:flex; align-items:center; gap:2.5rem; flex-wrap:wrap; padding-top:5rem; }
+.value__intro{ flex:1 1 360px; }
+.value__intro .lede{ margin-top:1.1rem; }
+.value__bix{
+  flex:0 0 auto; width:min(34%, 300px); object-fit:contain;
+  filter:drop-shadow(0 18px 26px rgba(42,37,33,.18));
+  animation: valBixFloat 5s ease-in-out infinite;
+}
+@keyframes valBixFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-12px); } }
+.scene--value .rail{ height:auto; min-height:auto; padding:2.5rem 0 3.5rem; }
+@media (max-width:780px){
+  .value__bix{ width:62%; margin:0 auto; }
+  .value__head{ padding-top:4rem; }
+}
+@media (prefers-reduced-motion:reduce){ .value__bix{ animation:none; } }
+
+/* 4) S6 'your turn': el texto secundario se perdia sobre el fondo brillante.
+      Lo paso a oscuro con un halo suave + agrego botones a las secciones. */
+.scene--cta .eyebrow,
+.scene--cta .lede,
+.scene--cta .social__label,
+.scene--cta .signoff{
+  color: var(--ink);
+  text-shadow: 0 1px 2px rgba(255,251,244,.6), 0 2px 16px rgba(255,251,244,.85);
+}
+.scene--cta .lede{ font-weight:500; }
+.cta-sections{ display:flex; gap:.7rem; flex-wrap:wrap; justify-content:center; margin-top:1.9rem; }
+.cta-sections .btn{ font-size:.9rem; padding:.85rem 1.4rem; }
+
+/* ── Nav superior (para movernos entre apartados) ── */
+.topnav{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; gap:.4rem; flex-wrap:wrap;
+  padding:.7rem clamp(1rem, 4vw, 2.5rem);
+  background:rgba(242,235,224,.82); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border, #e6ddcf);
+}
+.topnav__brand{
+  font-family:var(--font-mono); font-weight:700; font-size:.95rem;
+  color:var(--ink); text-decoration:none; margin-right:auto;
+}
+.topnav__brand::before{ content:"› "; color:var(--orange); }
+.topnav__link{
+  font-family:var(--font-mono); font-size:.84rem; color:var(--ink-soft);
+  text-decoration:none; padding:.4rem .7rem; border-radius:9px;
+  transition:background .15s ease, color .15s ease;
+}
+.topnav__link:hover{ background:var(--panel); color:var(--ink); }
+.topnav__link.is-active{ color:var(--ink); background:var(--panel); border:1px solid var(--border,#e6ddcf); }
+
+/* ── Encabezado de sección ── */
+.section{ width:min(100% - 2.5rem, var(--maxw)); margin:0 auto; padding:3.2rem 0; }
+.section__head{ margin-bottom:1.6rem; }
+.section__head--row{ display:flex; align-items:flex-end; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+.section__eyebrow{
+  font-family:var(--font-mono); font-size:.78rem; letter-spacing:.14em;
+  text-transform:lowercase; color:var(--ink-soft);
+}
+.section__title{
+  font-family:var(--font-display); font-weight:800;
+  font-size:clamp(1.7rem, 5vw, 2.8rem); line-height:1.04; letter-spacing:-.02em;
+}
+.section__more{
+  font-family:var(--font-mono); font-size:.85rem; color:var(--ink);
+  text-decoration:none; border-bottom:2px solid var(--yellow);
+}
+
+/* ── Ajustes responsive (móvil / tablet) ── */
+@media (max-width:560px){
+  .section{ padding:2.2rem 0; }
+  .topnav{ padding:.6rem .9rem; gap:.2rem; }
+  .topnav__link{ padding:.35rem .5rem; font-size:.8rem; }
+  .article{ padding:1.6rem 0 1rem; }
+  .carousel__rail{ padding-left:1rem; padding-right:1rem; }
+}
+
+/* ── Carrusel "lo nuevo" ── */
+.carousel{ position:relative; }
+.carousel__rail{
+  display:flex; gap:1.2rem; overflow-x:auto; scroll-snap-type:x mandatory;
+  padding:.4rem clamp(1rem,4vw,2.5rem) 1.4rem;
+  scrollbar-width:none; -ms-overflow-style:none;
+}
+.carousel__rail::-webkit-scrollbar{ display:none; }
+
+/* tarjeta del carrusel: SOLO imagen + título en negrita (sin apreturas) */
+.snap{
+  scroll-snap-align:start; flex:0 0 78vw; max-width:360px;
+  text-decoration:none; color:var(--ink); display:block;
+}
+@media (min-width:780px){ .snap{ flex-basis:360px; } }
+.snap__cover{
+  width:100%; aspect-ratio:16/9; object-fit:cover; display:block;
+  border-radius:16px; border:1px solid var(--border, #e8dfd0); background:var(--cream);
+  box-shadow:0 20px 40px -28px rgba(42,37,33,.4);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.snap:hover .snap__cover{ transform:translateY(-3px); box-shadow:0 26px 48px -24px rgba(42,37,33,.5); }
+.snap__title{
+  font-family:var(--font-display); font-weight:800; font-size:1.2rem; line-height:1.18;
+  letter-spacing:-.01em; margin-top:.8rem;
+}
+.snap__title::after{
+  content:""; display:block; width:40px; height:4px; border-radius:3px;
+  background:var(--acc, var(--orange)); margin-top:.55rem;
+}
+.carousel__btn{
+  position:absolute; top:38%; z-index:5; width:42px; height:42px; border:0; cursor:pointer;
+  border-radius:50%; background:var(--ink); color:var(--cream); font-size:1.1rem;
+  display:none; align-items:center; justify-content:center;
+  box-shadow:0 8px 20px -8px rgba(42,37,33,.6);
+}
+@media (min-width:900px){ .carousel__btn{ display:flex; } }
+.carousel__btn--prev{ left:.3rem; } .carousel__btn--next{ right:.3rem; }
+
+/* ── Grilla de secciones ── */
+.grid{
+  display:grid; gap:1.4rem;
+  /* min(100%, 280px) evita que se desborde en celulares angostos */
+  grid-template-columns:repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+}
+
+/* ── Tarjeta ── */
+.card{
+  background:var(--panel); border:1px solid var(--border, #e8dfd0);
+  border-radius:18px; overflow:hidden; display:flex; flex-direction:column;
+  box-shadow:0 20px 40px -28px rgba(42,37,33,.4);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.card:hover{ transform:translateY(-3px); box-shadow:0 26px 48px -26px rgba(42,37,33,.5); }
+/* barra de color de la publicación (teoría del color → el grid toma carácter) */
+.card__bar{ display:block; height:5px; background:var(--acc, var(--orange)); }
+.card__cover{ width:100%; aspect-ratio:16/9; object-fit:cover; background:var(--cream); }
+.card__body{ padding:1.1rem 1.2rem 1.3rem; display:flex; flex-direction:column; gap:.55rem; flex:1; }
+.card__tag{
+  align-self:flex-start; font-family:var(--font-mono); font-size:.68rem;
+  letter-spacing:.08em; text-transform:uppercase; padding:.2rem .55rem; border-radius:6px;
+  color:var(--ink); background:var(--cream); border:1px solid var(--border,#e8dfd0);
+}
+.card__tag--guias{ background:#fbf2d6; border-color:var(--yellow); }
+.card__tag--memes{ background:#e4f0f7; border-color:var(--blue); }
+.card__tag--blog{ background:#f8e7d6; border-color:var(--orange); }
+.card__title{ font-family:var(--font-display); font-weight:700; font-size:1.18rem; line-height:1.15; }
+.card__text{ color:var(--ink-soft); font-size:.95rem; line-height:1.45; }
+.card__caption{
+  font-size:.9rem; color:var(--ink-soft); line-height:1.5; white-space:pre-line;
+  background:var(--cream); border-radius:10px; padding:.7rem .8rem; border:1px dashed var(--border,#e6ddcf);
+}
+.card__actions{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:auto; padding-top:.4rem; }
+
+/* ── Botones ── */
+.btn{
+  display:inline-flex; align-items:center; gap:.4rem; cursor:pointer;
+  font-family:var(--font-mono); font-weight:700; font-size:.82rem; text-decoration:none;
+  padding:.6rem 1rem; border-radius:10px; border:1px solid transparent;
+  transition:transform .15s ease, background .15s ease, color .15s ease;
+}
+.btn:hover{ transform:translateY(-2px); }
+.btn--primary{ background:var(--ink); color:var(--cream); }
+.btn--primary:hover{ background:var(--orange); }
+.btn--ghost{ background:var(--panel); color:var(--ink); border-color:var(--border,#e6ddcf); }
+.btn--ghost:hover{ background:var(--cream); }
+.btn--share{ background:var(--cream); color:var(--ink); border-color:var(--border,#e6ddcf); padding:.55rem .8rem; }
+
+/* ── CTA de embudo (link en bio → guía) ── */
+.lead-cta{
+  font-family:var(--font-mono); font-size:.8rem; color:var(--ink);
+  background:var(--yellow); padding:.55rem .9rem; border-radius:10px; text-decoration:none;
+  display:inline-flex; align-items:center; gap:.4rem; font-weight:700;
+}
+.lead-cta:hover{ filter:brightness(1.03); transform:translateY(-2px); }
+
+/* ── Feed estilo 9gag (apartado de memes) ── */
+.feed{ max-width:560px; margin:0 auto; display:flex; flex-direction:column; gap:1.6rem; }
+.post{
+  background:var(--panel); border:1px solid var(--border, #e8dfd0);
+  border-radius:16px; overflow:hidden;
+  box-shadow:0 20px 40px -28px rgba(42,37,33,.4);
+}
+.post__head{ padding:1rem 1.1rem .2rem; display:flex; flex-direction:column; gap:.5rem; }
+.post__title{ font-family:var(--font-display); font-weight:800; font-size:1.35rem; line-height:1.15; }
+.post__media{ display:block; margin-top:.7rem; background:var(--cream); }
+.post__media img{ width:100%; height:auto; display:block; }   /* tamaño real del meme */
+.post__video{ width:100%; height:auto; display:block; margin-top:.7rem; background:#000; }
+.post__caption{
+  padding:.9rem 1.1rem; color:var(--ink-soft); font-size:.93rem; line-height:1.5;
+  white-space:pre-line;
+}
+.post__bar{
+  display:flex; flex-wrap:wrap; gap:.5rem; align-items:center;
+  padding:.7rem 1rem; border-top:1px solid var(--border, #e8dfd0);
+}
+.post__cta{ margin:0; border-radius:0; justify-content:center; padding:.85rem; }
+
+/* ── Botones de compartir por red (pills con el color de cada plataforma) ── */
+.sbtn{
+  display:inline-flex; align-items:center; gap:.45rem; cursor:pointer;
+  font-family:var(--font-mono); font-weight:700; font-size:.8rem; text-decoration:none;
+  padding:.5rem .85rem; border-radius:999px;
+  border:1px solid var(--border, #e6ddcf); background:var(--panel); color:var(--ink);
+  transition:transform .15s ease, background .15s ease, border-color .15s ease;
+}
+.sbtn:hover{ transform:translateY(-2px); }
+.sbtn::before{ content:""; width:9px; height:9px; border-radius:50%; flex:0 0 auto; }
+.sbtn--wa::before{ background:#25D366; }
+.sbtn--fb::before{ background:#1877F2; }
+.sbtn--x::before{  background:#111111; }
+.sbtn--ig::before{ background:radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 70%, #285AEB 100%); }
+.sbtn--tt::before{ background:linear-gradient(45deg, #25F4EE, #FE2C55); }
+.sbtn--link::before{ background:#6b6157; }
+
+/* ── Visor de post (blog) ── */
+.article{ width:min(100% - 2.5rem, 720px); margin:0 auto; padding:2.4rem 0 1rem; }
+.article__title{
+  font-family:var(--font-display); font-weight:800;
+  font-size:clamp(1.8rem, 5vw, 2.8rem); line-height:1.08; letter-spacing:-.02em;
+  margin:.5rem 0 1.3rem;
+}
+.article__cover{
+  width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:16px;
+  border:1px solid var(--border, #e8dfd0); margin-bottom:1.7rem;
+}
+.prose{ font-size:1.06rem; line-height:1.72; color:var(--ink); }
+.prose h2{ font-family:var(--font-display); font-weight:800; font-size:1.5rem; letter-spacing:-.01em; margin:1.9rem 0 .6rem; }
+.prose h3{ font-family:var(--font-display); font-weight:700; font-size:1.2rem; margin:1.4rem 0 .5rem; }
+.prose p{ margin:0 0 1rem; }
+.prose ul, .prose ol{ margin:0 0 1rem 1.3rem; }
+.prose li{ margin:.35rem 0; }
+.prose a{ color:var(--ink); text-decoration:underline; text-decoration-color:var(--orange); text-underline-offset:3px; }
+.prose blockquote{ border-left:3px solid var(--yellow); padding-left:1rem; margin:1.1rem 0; color:var(--ink-soft); }
+.prose code{ font-family:var(--font-mono); font-size:.9em; background:var(--cream); padding:.1rem .35rem; border-radius:5px; }
+.prose pre{ background:var(--night); color:#eaf0f6; padding:1rem 1.1rem; border-radius:12px; overflow:auto; margin:0 0 1rem; }
+.prose pre code{ background:none; color:inherit; padding:0; }
+.prose__fig{ margin:1.6rem 0; }
+.prose__fig img, .prose__img{
+  width:100%; height:auto; display:block; border-radius:14px;
+  border:1px solid var(--border, #e8dfd0);
+}
+.article__sources{ margin-top:2.2rem; border-top:1px solid var(--border, #e8dfd0); padding-top:1.2rem; }
+.article__sources h3{ font-family:var(--font-mono); font-size:.78rem; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-soft); margin-bottom:.5rem; }
+.article__sources ul{ margin-left:1.1rem; }
+.article__sources a{ color:var(--ink-soft); word-break:break-word; }
+.article__share{ margin-top:2rem; display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; }
+.article__sharelabel{ font-family:var(--font-mono); font-size:.8rem; color:var(--ink-soft); margin-right:.3rem; }
+
+/* ── Estado vacío ── */
+.empty{
+  text-align:center; padding:3rem 1rem; color:var(--ink-soft);
+  font-family:var(--font-mono); font-size:.9rem;
+}
+
+/* ── Revelado (mismo lenguaje que la landing) ── */
+.reveal{ opacity:0; transform:translateY(22px); }
+.reveal.is-in{ opacity:1; transform:none; transition:opacity .6s ease, transform .6s ease; }
+@media (prefers-reduced-motion:reduce){ .reveal{ opacity:1; transform:none; } }
+
+/* ── Aviso de cookies ── */
+.cookie-bar{
+  position:fixed; left:50%; bottom:1rem; transform:translateX(-50%); z-index:100;
+  width:min(100% - 1.5rem, 640px);
+  display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:space-between;
+  background:var(--panel); color:var(--ink);
+  border:1px solid var(--border, #e6ddcf); border-radius:14px; padding:.9rem 1.1rem;
+  box-shadow:0 18px 44px -16px rgba(42,37,33,.5);
+}
+.cookie-bar p{ margin:0; flex:1 1 260px; font-size:.88rem; line-height:1.45; color:var(--ink-soft); }
+.cookie-bar__btns{ display:flex; gap:.5rem; }
+.cookie-bar .btn{ font-size:.82rem; }
+
+/* ── Footer reusable ── */
+.foot{
+  text-align:center; padding:3rem 1rem 4rem;
+  font-family:var(--font-mono); font-size:.78rem; color:var(--ink-soft);
+}
+.foot a{ color:var(--ink); }

@@ -1,0 +1,7 @@
+You keep hearing 'AI agent' everywhere — but what does it actually mean for someone running a small business? Here's the simplest way to think about it: a regular AI chatbot answers your questions. An AI agent takes a goal and goes and does the work.
+
+Picture this: instead of asking 'how do I follow up with customers after a quote?', you tell the agent to go through your inbox, find every customer who got a quote in the last two weeks and hasn't replied, and draft a follow-up for each one. You review the drafts. You click send. What used to take 45 minutes takes 10.
+
+You stay in charge the whole time — a well-built agent shows you what it's doing and asks before anything important happens. Think of it as a very organized assistant who lays everything out on your desk and says, 'Here's what I've prepared — want me to go ahead?'
+
+We wrote a plain-English breakdown of exactly how this works — no jargon, no hype, just a calm explanation with examples any small business owner can relate to. Read the full post on the site, and grab our free guide using the link in bio. 👇
