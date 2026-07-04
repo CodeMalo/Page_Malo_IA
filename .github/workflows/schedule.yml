@@ -1,0 +1,40 @@
+# ════════════════════════════════════════════════════════════════
+# Calendario malo_ia — publica el contenido PROGRAMADO solo, cada día.
+# Cómo funciona:
+#   - Vos creás el item con su texto/imágenes (con tus keys, local) y le ponés
+#     'publish: AAAA-MM-DD' en el item.md. Eso lo deja LISTO pero oculto.
+#   - El caché (.cache.json, commiteado) guarda lo ya generado.
+#   - Este Action corre cada día: rebuild SIN keys (reusa el caché, no regenera
+#     ni pisa nada) y, cuando llega la fecha de un item, lo publica y hace push.
+#
+# Para activarlo:  Settings → Actions → General → Workflow permissions →
+#                  "Read and write permissions".  (ya está el permiso abajo)
+# Ajustá la hora del cron (está en UTC).
+# ════════════════════════════════════════════════════════════════
+name: publish-scheduled
+
+on:
+  schedule:
+    - cron: "0 13 * * *"      # todos los días ~13:00 UTC (~8am MX). Ajustá.
+  workflow_dispatch: {}        # también se puede correr a mano
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install Pillow
+      - name: Rebuild (reusa caché, publica lo que ya llegó su fecha)
+        run: python tools/build.py
+      - name: Commit + push si cambió
+        run: |
+          git config user.name  "malo_ia bot"
+          git config user.email "bot@malo-ia.local"
+          git add -A
+          git diff --cached --quiet || git commit -m "publicar programado ($(date +%F))"
+          git push

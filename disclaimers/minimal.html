@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mal Mercado — Disclaimer 01 · Minimal</title>
+<!--
+  DISCLAIMER ANIMADO 01 · MINIMALISTA ELEGANTE
+  Formato vertical 9:16 para redes (X, IG, TikTok, LinkedIn).
+  Cómo grabarlo: abre esta página, F11 (pantalla completa) y graba con
+  Win+Alt+R (Game Bar) u OBS a 1080x1920. El ciclo dura ~19s y se repite solo.
+  Personalización: edita el arreglo ESCENAS al final del archivo.
+  Dirección de arte: silencio visual, tipografía cinética con revelados de
+  máscara, una sola tinta + el verde señal como único acento. El lujo es el espacio.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{ --fondo:#f4f4f1; --tinta:#101312; --gris:#9a9e9b; --verde:#19c37d; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;display:grid;place-items:center;min-height:100vh;font-family:"Space Grotesk",sans-serif}
+.stage{width:min(56.25vh,100vw);aspect-ratio:9/16;background:var(--fondo);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;padding:9%}
+
+/* marca fija arriba y contador abajo */
+.marca{position:absolute;top:7%;left:9%;font-family:"JetBrains Mono",monospace;font-size:clamp(10px,1.4vh,14px);
+  letter-spacing:.28em;color:var(--tinta)}
+.marca b{color:var(--verde);font-weight:500}
+.regla{position:absolute;bottom:7%;left:9%;right:9%;display:flex;justify-content:space-between;
+  font-family:"JetBrains Mono",monospace;font-size:clamp(9px,1.2vh,12px);letter-spacing:.2em;color:var(--gris)}
+.linea-base{position:absolute;bottom:calc(7% + 3.2vh);left:9%;height:1px;background:var(--tinta);width:0;
+  animation:medir 19s linear infinite}
+@keyframes medir{from{width:0}to{width:82%}}
+
+/* escenas */
+.escena{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:9%;
+  opacity:0;pointer-events:none}
+.escena.activa{opacity:1}
+.escena .num{font-family:"JetBrains Mono",monospace;font-size:clamp(10px,1.4vh,14px);color:var(--verde);
+  letter-spacing:.3em;margin-bottom:2.4vh;overflow:hidden}
+.escena h2{font-weight:700;font-size:clamp(28px,5.4vh,58px);line-height:1.12;letter-spacing:-.02em;color:var(--tinta)}
+.escena h2 .verde{color:var(--verde)}
+.escena h2 .linea{display:block;overflow:hidden}
+.escena h2 .linea span{display:inline-block;transform:translateY(110%)}
+.escena.activa h2 .linea span{animation:revelar .9s cubic-bezier(.19,1,.22,1) forwards}
+.escena.activa h2 .linea:nth-child(2) span{animation-delay:.12s}
+.escena.activa h2 .linea:nth-child(3) span{animation-delay:.24s}
+.escena.activa .num{animation:aparecer .6s ease forwards}
+.escena.saliendo h2 .linea span{animation:salir .5s cubic-bezier(.55,0,.55,.2) forwards}
+@keyframes revelar{to{transform:translateY(0)}}
+@keyframes salir{to{transform:translateY(-115%)}}
+@keyframes aparecer{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* cierre con wordmark */
+.cierre h2{font-size:clamp(34px,6.4vh,70px)}
+.punto-senal{display:inline-block;width:.5em;height:.5em;border-radius:50%;background:var(--verde);
+  margin-left:.18em;animation:latir 1.6s ease-in-out infinite}
+@keyframes latir{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="marca">MAL <b>MERCADO</b></div>
+  <div class="linea-base"></div>
+  <div class="regla"><span>DISCLAIMER</span><span id="pagina">01 / 06</span></div>
+</div>
+
+<script>
+const ESCENAS = [
+  { num: "01 — LO PRIMERO",  lineas: ["Esto es contenido", "<span class='verde'>educativo</span>."] },
+  { num: "02 — SIN TÍTULOS", lineas: ["No somos asesores", "financieros."] },
+  { num: "03 — SIN CUENTOS", lineas: ["Nadie puede garantizar", "rendimientos."] },
+  { num: "04 — DE FRENTE",   lineas: ["Quien te los garantice,", "te está <span class='verde'>mintiendo</span>."] },
+  { num: "05 — TU CONTROL",  lineas: ["Tu dinero.", "Tus decisiones."] },
+  { num: "06 — LA PROMESA",  lineas: ["El mercado es ruido.", "Recibe la <span class='verde'>señal</span><span class='punto-senal'></span>"], cierre: true },
+];
+const DURACION = 3100;   // ms por escena
+
+const stage = document.getElementById("stage");
+const pagina = document.getElementById("pagina");
+const nodos = ESCENAS.map((e, i) => {
+  const div = document.createElement("div");
+  div.className = "escena" + (e.cierre ? " cierre" : "");
+  div.innerHTML = `<p class="num">${e.num}</p><h2>` +
+    e.lineas.map(l => `<span class="linea"><span>${l}</span></span>`).join("") + "</h2>";
+  stage.appendChild(div);
+  return div;
+});
+
+let actual = 0;
+function mostrar(i) {
+  nodos.forEach((n, j) => {
+    n.classList.toggle("activa", j === i);
+    n.classList.remove("saliendo");
+  });
+  pagina.textContent = String(i + 1).padStart(2, "0") + " / " + String(ESCENAS.length).padStart(2, "0");
+  setTimeout(() => nodos[i].classList.add("saliendo"), DURACION - 520);
+}
+mostrar(0);
+setInterval(() => { actual = (actual + 1) % ESCENAS.length; mostrar(actual); }, DURACION);
+</script>
+</body>
+</html>

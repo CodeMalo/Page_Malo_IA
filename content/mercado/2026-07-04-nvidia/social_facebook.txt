@@ -1,0 +1,5 @@
+Esta semana, las señales del mercado para NVIDIA y el sector de semiconductores son contradictorias. Desde Japón se reportan caídas abruptas impulsadas por dudas sobre la rentabilidad real de la IA. En Estados Unidos, los datos de Bank of America citados por Bloomberg muestran las mayores salidas de capital en más de tres meses. Ese tipo de movimiento institucional puede presionar precios incluso cuando los fundamentos de una empresa no han cambiado.
+
+Al mismo tiempo, hay noticias que muestran adopción activa de infraestructura de NVIDIA en sectores como telecomunicaciones. Tres compañías validaron un modelo de referencia de IA sobre sus sistemas, lo que indica que la integración va más allá de los grandes centros de datos.
+
+Lo que el análisis observa es un mercado en proceso de recalibrar sus expectativas, no de abandonar el tema. El desglose completo está disponible en el blog de Mal Mercado: https://codemalo.github.io/Page_Malo_IA/mercado.html

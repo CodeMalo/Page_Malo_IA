@@ -1,5 +1,5 @@
 {
-  "n": 7,
+  "n": 10,
   "map": {
     "2026-06-18-what-is-an-ai-agent": 0,
     "2026-06-21-us-orders-global-shutdown-of-anthropics-most-pow": 1,
@@ -7,6 +7,9 @@
     "2026-06-19-prompt-vs-realidad": 3,
     "2026-06-20-la-ia-no-muerde": 4,
     "2026-06-22-ai-for-small-business-owners-the-30-minutes-star": 5,
-    "2026-06-22-jeff-bezos-thinks-ai-wont-replace-humans-it-will": 6
+    "2026-06-22-jeff-bezos-thinks-ai-wont-replace-humans-it-will": 6,
+    "2026-07-04-bitcoin": 7,
+    "2026-07-04-mercado": 8,
+    "2026-07-04-nvidia": 9
   }
 }

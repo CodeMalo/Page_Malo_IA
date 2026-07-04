@@ -38,6 +38,20 @@ def main():
     img = "MOCK" if providers.IMAGE_MOCK else "Gemini"
     print(f"== build malo-ia-site · texto={txt} · imágenes={img} ==")
 
+    import os, hashlib
+    regen = os.environ.get("MALO_REGEN", "") in ("1", "true", "True")
+    lead_sig = json.dumps(cfg.get("lead", {}), sort_keys=True)
+
+    def _item_hash(it):
+        h = hashlib.sha256()
+        h.update((it["dir"] / "item.md").read_bytes())
+        for f in sorted(it["dir"].glob("*")):
+            if f.is_file() and f.name not in ("item.md", ".cache.json"):
+                h.update(f"{f.name}:{f.stat().st_size}".encode())
+        h.update(lead_sig.encode())
+        return h.hexdigest()[:16]
+
+    today = datetime.now().strftime("%Y-%m-%d")
     items = content.load_items()
     cards = []
     for it in items:
@@ -49,11 +63,34 @@ def main():
         if not handler:
             print(f"  ! sección desconocida: {it['section']}")
             continue
-        print(f"  → {it['section']}/{it['slug']}")
-        card = handler(it, cfg)
-        # color de teoría del color para CADA publicación (así el grid salta y
-        # toma carácter). Estable por slug; el blog ya trae el suyo.
-        card.setdefault("accent", palette.to_hex(palette.assign(card["id"])[0]))
+        # Caché: si el item no cambió, reusamos lo generado (no re-llama a Claude/
+        # Gemini ni pisa texto real). Forzá regeneración con MALO_REGEN=1.
+        # Generamos/cacheamos SIEMPRE (así lo programado queda pre-renderizado y el
+        # build diario lo puede publicar sin keys ni pisar nada).
+        cache_f = it["dir"] / ".cache.json"
+        ih = _item_hash(it)
+        card = None
+        if cache_f.exists() and not regen:
+            try:
+                c = json.loads(cache_f.read_text(encoding="utf-8"))
+                if c.get("hash") == ih:
+                    card = c.get("card")
+            except Exception:
+                pass
+        if card is None:
+            print(f"  → {it['section']}/{it['slug']} (generando)")
+            card = handler(it, cfg)
+            card.setdefault("accent", palette.to_hex(palette.assign(card["id"])[0]))
+            try:
+                cache_f.write_text(json.dumps({"hash": ih, "card": card}, ensure_ascii=False), encoding="utf-8")
+            except Exception:
+                pass
+        # Calendario: solo APARECE en el sitio si la fecha ya llegó.
+        pub = str(meta.get("publish", "")).strip()
+        if pub and pub > today:
+            print(f"  · {it['section']}/{it['slug']} — programado para {pub} (listo, esperando)")
+            continue
+        print(f"  ✓ {it['section']}/{it['slug']}")
         cards.append(card)
 
     # más nuevo primero (por fecha; si empata, por slug)

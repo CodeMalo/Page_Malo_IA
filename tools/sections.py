@@ -15,7 +15,7 @@ import json, re, shutil
 from pathlib import Path
 
 from PIL import Image
-import providers, style, palette, blog_card
+import providers, style, palette, blog_card, mm_cover
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public"
@@ -307,8 +307,140 @@ def handle_blog(item, cfg):
     }
 
 
+# ── MERCADO (blog automatizado de Mal Mercado) ────────────────────────────────
+MM_DISCLAIMER = (
+    "\n\n---\n\n"
+    "*Mal Mercado es contenido educativo e informativo de análisis general de "
+    "mercados: la misma información para todos los lectores. No es asesoría de "
+    "inversión personalizada ni recomendación individualizada; no somos asesores "
+    "registrados ante la CNBV. Invertir implica riesgo de pérdida. Los rendimientos "
+    "pasados no garantizan rendimientos futuros. Cada quien es responsable de sus "
+    "propias decisiones.*"
+)
+
+# Redes para las que generamos copy listo para pegar (email matutino).
+MM_PLATAFORMAS = ["youtube", "instagram", "facebook", "tiktok", "x", "threads", "linkedin"]
+
+
+def mm_social(d, title, summary, body_md, cfg):
+    """Copys por red social (YouTube/IG/FB/TikTok/X/Threads/LinkedIn) en español,
+    en voz Mal Mercado y SIN lenguaje imperativo de compra/venta. Se guardan como
+    social_<red>.txt para copiar/pegar. Devuelve el dict."""
+    url = cfg.get("mercado", {}).get("blog_url", "malmercado")
+
+    def _mock():
+        base = f"{title}\n\n{summary}\n\nLee el análisis completo en {url}."
+        return {p: base for p in MM_PLATAFORMAS}
+
+    soc = providers.write_text(
+        system=(
+            "Eres el copywriter de Mal Mercado, marca de análisis de mercados con IA. "
+            "Español claro, tono confiable y tech, SIN emojis. NUNCA uses lenguaje "
+            "imperativo de inversión ('compra', 'vende', 'invierte en X'): hablas de lo "
+            "que el análisis observa, no das órdenes. Devuelves SIEMPRE un único JSON válido."
+        ),
+        prompt=(
+            f"Título del artículo: {title}\nResumen: {summary}\n"
+            f"Texto publicado (base para los copys):\n{body_md[:4000]}\n"
+            f"Enlace al blog: {url}\n\n"
+            "Devuelve SOLO este JSON con un copy nativo por plataforma (español, sin emojis, "
+            "sin órdenes de compra/venta, cada uno invita a leer el análisis completo):\n"
+            '{"youtube":"título + descripción para un Short","instagram":"caption con 5-8 '
+            'hashtags al final","facebook":"2-3 párrafos cortos","tiktok":"gancho + 3-5 '
+            'hashtags","x":"hilo en 1 tuit de máx 270 caracteres","threads":"post breve",'
+            '"linkedin":"post profesional de 2-3 párrafos"}'
+        ),
+        mock_fn=_mock,
+    )
+    for p in MM_PLATAFORMAS:
+        try:
+            (d / f"social_{p}.txt").write_text(soc.get(p, ""), encoding="utf-8")
+        except Exception:
+            pass
+    return soc
+
+
+def handle_mercado(item, cfg):
+    meta, slug, d = item["meta"], item["slug"], item["dir"]
+    title = meta.get("title", slug.replace("-", " ").title())
+    topic = meta.get("cover_topic", title)
+    sources = meta.get("sources", []) if isinstance(meta.get("sources"), list) else []
+    tickers = meta.get("tickers", []) if isinstance(meta.get("tickers"), list) else []
+
+    # 1) El artículo SEO (Claude) a partir del brief de noticias del día.
+    def _mock():
+        return {
+            "summary": f"{title}: qué observan las señales del mercado, explicado claro.",
+            "body": item["body"] or "(brief de noticias vacío)",
+            "category": "Mercados",
+            "tags": [t for t in tickers[:5]] or ["mercados", "inversión"],
+        }
+    txt = providers.write_text(
+        system=(
+            "Eres el redactor del blog de Mal Mercado. Audiencia: personas en México que "
+            "quieren entender los mercados sin ser expertas. Voz: clara, directa, confiable, "
+            "en español, SIN emojis, sin jerga innecesaria. Escribes contenido EDUCATIVO "
+            "original y optimizado para SEO en Google. Regla legal ABSOLUTA: NUNCA des "
+            "instrucciones de compra/venta ('compra', 'vende', 'te conviene invertir'). "
+            "Describes lo que el análisis y las noticias OBSERVAN ('las señales apuntan', 'el "
+            "sentimiento es', 'los fundamentales muestran'). No inventes cifras: usa solo lo "
+            "que viene en el brief. Devuelves SIEMPRE un único JSON válido, sin fences."
+        ),
+        prompt=(
+            f"Escribe un artículo de blog genuinamente útil para Mal Mercado.\n"
+            f"Título de trabajo: {title}\nTema: {topic}\n"
+            f"Activos relacionados: {', '.join(tickers) or '(mercado general)'}\n"
+            f"Fuentes:\n{chr(10).join(sources) or '(ninguna)'}\n"
+            f"BRIEF de noticias del día (reescribe, estructura y EXPÁNDELO en un artículo "
+            f"original; las noticias pueden venir de medios de todo el mundo):\n{item['body'][:6000]}\n\n"
+            'Devuelve SOLO este JSON: {'
+            '"title":"un título SEO en español, claro y con gancho (máx ~70 caracteres), sin comillas",'
+            '"summary":"gancho de 1-2 frases que sirva como meta-descripción SEO (~155 chars)",'
+            '"body":"el artículo completo en Markdown para principiantes: intro breve que '
+            'conecte, luego ## subtítulos, párrafos cortos, alguna lista, un apartado ## '
+            'Preguntas frecuentes con 2-3 Q&A, y un cierre ## En resumen. NO repitas el título '
+            'como H1. Nada de órdenes de compra/venta.",'
+            '"category":"una categoría (ej. Acciones, Cripto, Macro, IA y mercados)",'
+            '"tags":["4-6 etiquetas SEO en minúsculas"]}'
+        ),
+        mock_fn=_mock,
+    )
+
+    title = (txt.get("title") or "").strip() or title   # Claude puede mejorar el título SEO
+    body_md = (txt.get("body") or item["body"]) + MM_DISCLAIMER
+    read_min = max(1, round(len(re.findall(r"\w+", body_md)) / 200))
+
+    # 2) Portada on-brand Mal Mercado (PIL, sin API, sin BIX).
+    cover_rel = f"public/media/mercado/{slug}.png"
+    cover_abs = PUBLIC / "media" / "mercado" / f"{slug}.png"
+    if not cover_abs.exists() or providers._REGEN:
+        cinta = [f"{t}" for t in tickers[:6]] or None
+        mm_cover.render(title, cover_abs, kicker=meta.get("kicker", "SEÑAL DEL MERCADO"),
+                        tickers=cinta)
+
+    # 3) Copys por red (para el email matutino). Español, sin emojis, sin imperativos.
+    social = mm_social(d, title, txt.get("summary", ""), body_md, cfg)
+
+    tags = txt.get("tags") if isinstance(txt.get("tags"), list) else []
+
+    return {
+        "id": slug, "type": "mercado", "title": title, "date": meta.get("date", ""),
+        "summary": txt.get("summary", ""),
+        "cover": cover_rel,
+        "accent": "#3ef08c",
+        "body": body_md,
+        "images": [],
+        "sources": sources,
+        "read_min": read_min,
+        "category": txt.get("category", "Mercados"),
+        "tags": tags,
+        "social": social,
+    }
+
+
 HANDLERS = {
     "guias": handle_guias,
     "memes": handle_memes,
     "blog":  handle_blog,
+    "mercado": handle_mercado,
 }

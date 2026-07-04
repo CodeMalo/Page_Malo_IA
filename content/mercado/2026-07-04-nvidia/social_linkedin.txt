@@ -1,0 +1,5 @@
+El análisis de esta semana sobre NVIDIA ilustra algo que ocurre con frecuencia en mercados de alta expectativa: los fundamentos operativos y el sentimiento de mercado pueden moverse en direcciones opuestas al mismo tiempo. Mientras los datos de flujos de capital citados por Bloomberg muestran las mayores salidas de acciones estadounidenses en más de tres meses, empresas de telecomunicaciones y tecnología siguen integrando infraestructura de NVIDIA en proyectos de próxima generación.
+
+Desde los mercados asiáticos, la pregunta que más peso tiene no es si la IA va a crecer, sino a qué ritmo y con qué márgenes reales. Esa recalibración de expectativas genera volatilidad en el corto plazo, incluso sobre empresas con posiciones sólidas en sus sectores. Entender esa diferencia entre ruido y tendencia es parte central del análisis de mercado riguroso.
+
+El desglose completo, con contexto de flujos, señales sectoriales y las noticias que rodean a NVIDIA esta semana, está disponible en Mal Mercado: https://codemalo.github.io/Page_Malo_IA/mercado.html

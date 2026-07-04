@@ -23,7 +23,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "content"
-SECTIONS = ("guias", "memes", "blog")
+SECTIONS = ("guias", "memes", "blog", "mercado")
 
 
 def _parse_frontmatter(text):

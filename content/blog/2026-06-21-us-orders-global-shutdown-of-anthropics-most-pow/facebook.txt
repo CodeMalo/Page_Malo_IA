@@ -1,7 +1,5 @@
-Imagine showing up to work one morning and the AI tool your business runs on has simply stopped working — no warning, no explanation. That's exactly what happened to thousands of Anthropic customers on June 12, 2026, when the U.S. government ordered an emergency global shutdown of two of its most powerful AI models over national security concerns.
+U.S. Orders Global Shutdown of Anthropic’s Most Powerful AI Models Over National Security Fears
 
-The government's worry? That foreign groups could exploit these models for cyberattacks or reverse-engineer them to build cheaper copies. Because blocking only foreign users isn't really possible, Anthropic had to cut off everyone — including everyday U.S. businesses — overnight. 🔌
+U.S. Orders Global Shutdown of Anthropic’s Most Powerful AI Models Over National Security Fears: what you need to know, explained calmly.
 
-For small business owners, the lesson here isn't to panic about AI. It's to recognize that cloud-based tools can disappear without warning, and that government rules around AI are being written in real time — sometimes in a hurry. Knowing which tools you actually depend on and having a backup plan is just good business sense.
-
-We broke down exactly what happened, what it means for you, and what to do about it — in plain, no-jargon language. Read the full post on the site, and grab our free guide (link in bio) to make sure your business isn't caught off guard.
+Read the full thing free on our site — and grab our free AI guide for business owners here: https://YOUR-LINK-IN-BIO

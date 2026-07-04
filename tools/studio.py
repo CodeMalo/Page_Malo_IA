@@ -106,6 +106,7 @@ class Studio(tk.Tk):
         # Comunes
         self.title_e = self._entry(wrap, "Título:", "")
         self.topic_e = self._entry(wrap, "Tema para la portada (opcional):", "")
+        self.publish_e = self._entry(wrap, "Publicar el (opcional, AAAA-MM-DD):", "")
 
         tk.Label(wrap, text="Descripción / investigación:", bg=CREAM, fg=INK).pack(anchor="w", padx=14)
         self.body_t = scrolledtext.ScrolledText(wrap, height=6, font=("Segoe UI", 10))
@@ -193,6 +194,8 @@ class Studio(tk.Tk):
         L = ["---", f"title: {data['title']}", f"date: {date.today().isoformat()}",
              f"status: {'published' if self.publish.get() else 'draft'}",
              f"cover_topic: {data['topic'] or data['title']}"]
+        if data.get("publish"):
+            L.append(f"publish: {data['publish']}")
         if section == "memes":
             if data["video_url"]: L.append(f"video_url: {data['video_url']}")
             if files.get("video"): L.append(f"video: {files['video']}")
@@ -249,6 +252,7 @@ class Studio(tk.Tk):
             data = {
                 "title": title,
                 "topic": self.topic_e.get().strip(),
+                "publish": self.publish_e.get().strip(),
                 "body": self.body_t.get("1.0", "end").strip(),
                 "video_url": getattr(self, "video_url_e", None).get().strip() if section == "memes" else "",
                 "sources": [l.strip() for l in self.sources_t.get("1.0", "end").splitlines() if l.strip()] if section == "blog" else [],
@@ -317,11 +321,4 @@ if __name__ == "__main__":
 
 
 
-try:
-    return json.loads(raw)
-except json.JSONDecodeError:
-    print("=== RAW DEL MODELO ===")
-    print(repr(raw[:400]))   # muestra los primeros 400 chars con comillas visibles
-    print("======================")
-    m = re.search(r'\{.*\}', raw, re.DOTALL)
-    return json.loads(m.group(0)) if m else {"_raw": raw}
+

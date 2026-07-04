@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mal Mercado — El mercado es ruido. Recibe la señal.</title>
+<meta name="description" content="Un motor de IA lee miles de titulares en todos los idiomas, el sentimiento de Reddit y los fundamentales del mercado. Cada lunes recibes la señal del portafolio modelo.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" type="image/png" href="assets/malmercado_logo.png">
+<meta property="og:title" content="Mal Mercado — El mercado es ruido. Recibe la señal.">
+<meta property="og:description" content="Señales de inversión generadas con IA, cada lunes en tu correo. $10 MXN por semana.">
+<meta property="og:image" content="assets/malmercado_logo.png">
+<meta property="og:type" content="website">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H41D8JJQZX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-H41D8JJQZX');
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --negro:#07090d;
+  --panel:rgba(255,255,255,.035);
+  --panel-borde:rgba(255,255,255,.09);
+  --texto:#eef2f6;
+  --gris:#8b95a3;
+  --gris-2:#5b6572;
+  --verde:#3ef08c;          /* señal */
+  --verde-glow:rgba(62,240,140,.35);
+  --violeta:#8b7bff;
+  --rojo:#ff6b6b;
+  --maxw:1080px; --r:16px;
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --sans:"Inter",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--texto);background:var(--negro);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{width:min(100% - 2.5rem,var(--maxw));margin-inline:auto;position:relative;z-index:1}
+::selection{background:var(--verde);color:var(--negro)}
+
+/* Orbes de fondo */
+.orbes{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(600px 400px at 85% -5%, rgba(139,123,255,.14), transparent 70%),
+    radial-gradient(700px 500px at 8% 20%, rgba(62,240,140,.09), transparent 70%),
+    radial-gradient(500px 400px at 60% 110%, rgba(62,240,140,.07), transparent 70%)}
+
+/* Animaciones */
+@keyframes subir{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes cinta{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes parpadeo{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes brillo{0%,100%{box-shadow:0 0 24px var(--verde-glow)}50%{box-shadow:0 0 44px var(--verde-glow)}}
+.anim{opacity:0}
+.anim.visible{animation:subir .7s cubic-bezier(.22,.8,.3,1) forwards}
+.hero .anim{animation:subir .8s cubic-bezier(.22,.8,.3,1) forwards}
+.hero .d1{animation-delay:.05s}.hero .d2{animation-delay:.16s}.hero .d3{animation-delay:.28s}
+.hero .d4{animation-delay:.4s}.hero .d5{animation-delay:.55s}
+@media (prefers-reduced-motion:reduce){.anim,.hero .anim{animation:none;opacity:1}.cinta__pista,.cursor,.btn--glow{animation:none}}
+
+/* Nav */
+.nav{display:flex;align-items:center;padding:1rem 1.5rem;position:sticky;top:0;z-index:20;
+  background:rgba(7,9,13,.75);backdrop-filter:blur(14px);border-bottom:1px solid var(--panel-borde)}
+.nav__marca{font-family:var(--mono);font-weight:700;font-size:.95rem;text-decoration:none;color:var(--texto)}
+.nav__marca b{color:var(--verde)}
+.nav__cta{margin-left:auto;font-size:.83rem;font-weight:600;text-decoration:none;color:var(--negro);
+  background:var(--verde);padding:.55rem 1.15rem;border-radius:8px;transition:filter .2s}
+.nav__cta:hover{filter:brightness(1.12)}
+
+/* Cinta */
+.cinta{border-bottom:1px solid var(--panel-borde);overflow:hidden;padding:.5rem 0;background:rgba(255,255,255,.015)}
+.cinta__pista{display:flex;gap:2.6rem;width:max-content;animation:cinta 34s linear infinite;font-family:var(--mono);font-size:.72rem}
+.cinta__pista span{color:var(--gris-2);white-space:nowrap}
+.cinta__pista b{color:var(--gris);font-weight:500}
+.cinta .up{color:var(--verde);font-style:normal}.cinta .down{color:var(--rojo);font-style:normal}
+
+/* Hero */
+.hero{padding:5.5rem 0 4rem;text-align:center}
+.chip{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--verde);border:1px solid rgba(62,240,140,.3);background:rgba(62,240,140,.06);
+  padding:.45rem 1rem;border-radius:99px;margin-bottom:1.6rem}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--verde);box-shadow:0 0 10px var(--verde)}
+.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(2.4rem,6.2vw,4.4rem);line-height:1.04;letter-spacing:-.03em;max-width:17ch;margin-inline:auto}
+.hero h1 .grad{background:linear-gradient(100deg,var(--verde) 10%,#9dfcc7 45%,var(--violeta) 95%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(1rem,1.5vw,1.14rem);line-height:1.7;color:var(--gris);max-width:58ch;margin:1.5rem auto 0}
+.lede b{color:var(--texto);font-weight:600}
+.btn{display:inline-block;background:var(--verde);color:var(--negro);font-weight:700;font-size:1rem;
+  padding:1rem 2.3rem;border-radius:12px;text-decoration:none;margin-top:2.1rem;transition:transform .18s,filter .18s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.btn--glow{animation:brillo 3.2s ease-in-out infinite}
+.nota{font-family:var(--mono);font-size:.75rem;color:var(--gris-2);margin-top:1rem;letter-spacing:.03em}
+
+/* Stats chips */
+.stats{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:2.6rem}
+.stat{font-family:var(--mono);font-size:.75rem;color:var(--gris);border:1px solid var(--panel-borde);
+  background:var(--panel);padding:.55rem 1.05rem;border-radius:99px;backdrop-filter:blur(8px)}
+.stat b{color:var(--verde);font-weight:500}
+
+/* Terminal */
+.terminal{max-width:680px;margin:3.4rem auto 0;background:#0b0e14;border:1px solid var(--panel-borde);
+  border-radius:var(--r);text-align:left;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 60px rgba(62,240,140,.05)}
+.terminal__barra{display:flex;align-items:center;gap:.45rem;padding:.8rem 1.1rem;border-bottom:1px solid var(--panel-borde)}
+.terminal__barra i{width:11px;height:11px;border-radius:50%;display:block}
+.terminal__barra i:nth-child(1){background:#ff5f57}.terminal__barra i:nth-child(2){background:#febc2e}.terminal__barra i:nth-child(3){background:#28c840}
+.terminal__barra span{margin-left:auto;font-family:var(--mono);font-size:.68rem;color:var(--gris-2)}
+.terminal__cuerpo{padding:1.3rem 1.5rem;font-family:var(--mono);font-size:.8rem;line-height:2.05;color:#c8d2dc;overflow-x:auto}
+.terminal__cuerpo .c{color:var(--gris-2)}
+.terminal__cuerpo .v{color:var(--verde)}
+.terminal__cuerpo .m{color:var(--violeta)}
+.terminal__cuerpo .a{color:#f5c451}
+.cursor{display:inline-block;width:8px;height:1em;background:var(--verde);vertical-align:text-bottom;animation:parpadeo 1s steps(1) infinite}
+
+/* Gráfico que se dibuja solo */
+@keyframes dibujar{to{stroke-dashoffset:0}}
+@keyframes aparecer{to{opacity:1}}
+@keyframes pulso{0%,100%{r:4;opacity:1}50%{r:7;opacity:.5}}
+.grafico{border-top:1px solid var(--panel-borde);padding:1rem 1.5rem 1.2rem;position:relative}
+.grafico svg{width:100%;height:96px;display:block}
+.grafico .linea{stroke-dasharray:1;stroke-dashoffset:1;animation:dibujar 2.6s cubic-bezier(.4,0,.2,1) .9s forwards;
+  filter:drop-shadow(0 0 6px rgba(62,240,140,.6))}
+.grafico .area{opacity:0;animation:aparecer 1.2s ease 2.6s forwards}
+.grafico .punto{fill:var(--verde);opacity:0;animation:aparecer .3s ease 3.3s forwards,pulso 2s ease-in-out 3.6s infinite}
+.grafico__label{font-family:var(--mono);font-size:.62rem;color:var(--gris-2);letter-spacing:.12em;text-transform:uppercase}
+
+/* Franja de fuentes */
+.fuentes{display:flex;align-items:center;gap:1.2rem;border-block:1px solid var(--panel-borde);
+  padding:.9rem 1.5rem;position:relative;z-index:1;background:rgba(255,255,255,.015)}
+.fuentes__label{font-family:var(--mono);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gris-2);white-space:nowrap}
+.fuentes__mascara{overflow:hidden;flex:1;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.fuentes__pista{display:flex;gap:2.4rem;width:max-content;animation:cinta 48s linear infinite;
+  font-family:var(--mono);font-size:.72rem;color:var(--gris)}
+.fuentes__pista span{white-space:nowrap}
+
+/* Pipeline de datos animado */
+.pipeline{display:flex;align-items:stretch}
+.nodo{background:var(--panel);border:1px solid var(--panel-borde);border-radius:var(--r);
+  padding:1.4rem;flex:1;backdrop-filter:blur(8px)}
+.nodo b{font-family:var(--mono);font-size:.8rem;color:var(--texto);display:block;margin-bottom:.4rem;letter-spacing:.04em}
+.nodo span{color:var(--gris);font-size:.82rem;line-height:1.55;display:block}
+.nodo--core{border-color:rgba(62,240,140,.4);box-shadow:0 0 34px rgba(62,240,140,.08)}
+.nodo--core b{color:var(--verde)}
+.nodo--out{border-color:rgba(139,123,255,.4)}
+.nodo--out b{color:var(--violeta)}
+.flujo{flex:0 0 72px;position:relative;align-self:center;height:2px;background:var(--panel-borde)}
+@keyframes fluir{0%{left:-7px;opacity:0}12%{opacity:1}88%{opacity:1}100%{left:100%;opacity:0}}
+.flujo i{position:absolute;top:-2.5px;left:-7px;width:7px;height:7px;border-radius:50%;
+  background:var(--verde);box-shadow:0 0 9px var(--verde);animation:fluir 2.1s linear infinite}
+.flujo i:nth-child(2){animation-delay:.7s}
+.flujo i:nth-child(3){animation-delay:1.4s}
+@media (max-width:760px){
+  .pipeline{flex-direction:column}
+  .flujo{flex:0 0 46px;width:2px;height:46px;align-self:center}
+  @keyframes fluirV{0%{top:-7px;opacity:0}12%{opacity:1}88%{opacity:1}100%{top:100%;opacity:0}}
+  .flujo i{left:-2.5px;top:-7px;animation-name:fluirV}
+}
+
+/* Radar giratorio */
+@keyframes girar{to{transform:rotate(360deg)}}
+.radar-mini{display:inline-block;width:15px;height:15px;border-radius:50%;border:1px solid rgba(62,240,140,.45);
+  position:relative;overflow:hidden;vertical-align:-3px;margin-left:7px}
+.radar-mini::before{content:"";position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 0deg,rgba(62,240,140,.85),transparent 70deg);animation:girar 2.4s linear infinite}
+
+/* Barras de score */
+@keyframes crecer{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.barras{display:flex;gap:5px;height:30px;align-items:flex-end;margin-top:1rem}
+.barras i{width:9px;border-radius:2px;background:linear-gradient(180deg,var(--verde),rgba(62,240,140,.12));
+  height:calc(var(--v)*100%);transform:scaleY(0);transform-origin:bottom}
+.card.visible .barras i{animation:crecer .7s cubic-bezier(.22,.8,.3,1) forwards}
+.card.visible .barras i:nth-child(2){animation-delay:.08s}.card.visible .barras i:nth-child(3){animation-delay:.16s}
+.card.visible .barras i:nth-child(4){animation-delay:.24s}.card.visible .barras i:nth-child(5){animation-delay:.32s}
+.card.visible .barras i:nth-child(6){animation-delay:.4s}.card.visible .barras i:nth-child(7){animation-delay:.48s}
+.card.visible .barras i:nth-child(8){animation-delay:.56s}
+.barras i.neg{background:linear-gradient(180deg,var(--rojo),rgba(255,107,107,.12))}
+
+/* Secciones */
+section{padding:4.5rem 0;position:relative;z-index:1}
+.sec-chip{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--verde);margin-bottom:1rem}
+.sec-title{font-family:var(--display);font-weight:700;font-size:clamp(1.7rem,3.6vw,2.5rem);letter-spacing:-.02em;margin-bottom:2.2rem;max-width:26ch}
+
+.pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
+.paso{background:var(--panel);border:1px solid var(--panel-borde);border-radius:var(--r);padding:1.7rem;
+  backdrop-filter:blur(8px);transition:transform .2s,border-color .2s}
+.paso:hover{transform:translateY(-4px);border-color:rgba(62,240,140,.35)}
+.paso .num{font-family:var(--mono);font-size:.75rem;color:var(--verde);letter-spacing:.1em}
+.paso b{display:block;font-family:var(--display);font-size:1.08rem;margin:.7rem 0 .4rem}
+.paso p{color:var(--gris);font-size:.92rem;line-height:1.65}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1rem}
+.card{background:var(--panel);border:1px solid var(--panel-borde);border-radius:var(--r);padding:1.6rem;
+  backdrop-filter:blur(8px);transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-4px);border-color:rgba(62,240,140,.35)}
+.card .tag{font-family:var(--mono);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--verde);display:block;margin-bottom:.7rem}
+.card h3{font-family:var(--display);font-weight:600;font-size:1.1rem;margin-bottom:.45rem}
+.card p{color:var(--gris);font-size:.92rem;line-height:1.65}
+
+/* Honestidad */
+.honesto{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+.honesto div{background:rgba(255,107,107,.04);border:1px solid rgba(255,107,107,.18);border-radius:var(--r);
+  padding:1.6rem;font-size:.92rem;line-height:1.7;color:var(--gris)}
+.honesto b{color:var(--texto);display:block;margin-bottom:.5rem;font-family:var(--display);font-size:1.03rem}
+.honesto .no{font-family:var(--mono);font-size:.68rem;color:var(--rojo);letter-spacing:.14em;display:block;margin-bottom:.6rem}
+
+/* Precio */
+.precio-card{max-width:430px;margin-inline:auto;position:relative;background:var(--panel);
+  border:1px solid var(--panel-borde);border-radius:calc(var(--r) + 4px);padding:2.5rem;text-align:center;backdrop-filter:blur(10px)}
+.precio-card::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;z-index:-1;
+  background:linear-gradient(140deg,var(--verde),transparent 40%,transparent 60%,var(--violeta));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.precio-card .plan{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gris)}
+.precio-card .monto{font-family:var(--display);font-weight:700;font-size:3.4rem;margin:.5rem 0 0}
+.precio-card .monto small{font-size:1rem;color:var(--gris);font-weight:500}
+.precio-card ul{list-style:none;text-align:left;margin:1.6rem 0;color:#c8d2dc;font-size:.92rem;line-height:2.1}
+.precio-card li{padding-left:1.5rem;position:relative}
+.precio-card li::before{content:"";position:absolute;left:.15rem;top:.78em;width:.45rem;height:.45rem;border-radius:2px;background:var(--verde);transform:rotate(45deg)}
+.precio-card .btn{width:100%;margin-top:.2rem}
+.precio-card .garantia{font-size:.78rem;color:var(--gris-2);margin-top:1.1rem;line-height:1.55}
+
+/* FAQ */
+.faq details{background:var(--panel);border:1px solid var(--panel-borde);border-radius:12px;padding:1.05rem 1.3rem;margin-bottom:.6rem;backdrop-filter:blur(8px)}
+.faq summary{font-weight:600;cursor:pointer;font-size:.95rem}
+.faq summary::marker{color:var(--verde)}
+.faq p{color:var(--gris);margin-top:.6rem;font-size:.92rem;line-height:1.65}
+
+footer{border-top:1px solid var(--panel-borde);padding:2.8rem 0;font-size:.76rem;color:var(--gris-2);line-height:1.7;position:relative;z-index:1}
+footer b{color:var(--gris)}
+footer .marca{font-family:var(--mono);color:var(--texto);font-size:.95rem;margin-bottom:1rem;display:block}
+footer .marca b{color:var(--verde)}
+</style>
+</head>
+<body>
+<div class="orbes" aria-hidden="true"></div>
+
+<nav class="nav">
+  <a class="nav__marca" href="#">
+    <img src="assets/malmercado_logo.png" alt="Mal Mercado" style="height:30px;width:30px;object-fit:cover;object-position:top left;border-radius:6px;vertical-align:middle;margin-right:.55rem">mal<b>_</b>mercado</a>
+  <a class="nav__cta" href="#precio">Obtener acceso</a>
+</nav>
+
+<div class="cinta" aria-hidden="true">
+  <div class="cinta__pista">
+    <span><b>VOO</b> 684.84 <i class="up">+0.4%</i></span><span><b>NVDA</b> 206.31 <i class="up">+1.2%</i></span>
+    <span><b>AAPL</b> 308.63 <i class="up">+0.8%</i></span><span><b>BTC</b> 61,930 <i class="down">-0.6%</i></span>
+    <span><b>AMD</b> 517.82 <i class="up">+2.1%</i></span><span><b>META</b> 721.40 <i class="up">+0.5%</i></span>
+    <span><b>SOL</b> 81.15 <i class="up">+3.4%</i></span><span><b>USD/MXN</b> 17.45</span>
+    <span><b>VOO</b> 684.84 <i class="up">+0.4%</i></span><span><b>NVDA</b> 206.31 <i class="up">+1.2%</i></span>
+    <span><b>AAPL</b> 308.63 <i class="up">+0.8%</i></span><span><b>BTC</b> 61,930 <i class="down">-0.6%</i></span>
+    <span><b>AMD</b> 517.82 <i class="up">+2.1%</i></span><span><b>META</b> 721.40 <i class="up">+0.5%</i></span>
+    <span><b>SOL</b> 81.15 <i class="up">+3.4%</i></span><span><b>USD/MXN</b> 17.45</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="chip anim d1">Motor de señales en vivo</p>
+    <h1 class="anim d2">El mercado es ruido.<br>Recibe <span class="grad">la señal</span>.</h1>
+    <p class="lede anim d3">Un motor de IA lee <b>miles de titulares</b>, el <b>sentimiento de Reddit y StockTwits</b>
+    y los <b>fundamentales</b> de cada empresa — y lo destila cada lunes en los movimientos del
+    <b>portafolio modelo</b>: qué entra, qué sale, con qué peso y por qué. Todo en porcentajes,
+    para cualquier monto. Lo replicas en tu broker en diez minutos.</p>
+    <a class="btn btn--glow anim d4" href="#precio">Obtener acceso — $10 MXN/semana</a>
+    <p class="nota anim d4">Un pago anual de $520. Sin renovación automática. Garantía de 30 días.</p>
+
+    <div class="stats anim d4">
+      <span class="stat">+<b class="cnt" data-fin="80">0</b> titulares/día analizados con IA</span>
+      <span class="stat"><b class="cnt" data-fin="17">0</b> fuentes de datos</span>
+      <span class="stat"><b class="cnt" data-fin="39">0</b> activos monitoreados</span>
+      <span class="stat"><b class="cnt" data-fin="52">0</b> señales al año</span>
+    </div>
+
+    <div class="terminal anim d5">
+      <div class="terminal__barra"><i></i><i></i><i></i><span>señales — lunes 07:00</span></div>
+      <div class="terminal__cuerpo">
+<span class="c">$ portafolio_modelo --semana actual</span><br>
+<span class="m">[núcleo]</span>  VOO &nbsp;— <span class="v">70%</span> de la asignación <span class="c">// S&amp;P 500, la base de largo plazo</span><br>
+<span class="m">[señal]</span> &nbsp;AAPL — <span class="v">15%</span> · score <span class="v">+0.36</span> <span class="c">// noticias +0.22 · social +0.56</span><br>
+<span class="m">[señal]</span> &nbsp;SOL &nbsp;— <span class="v">15%</span> · score <span class="v">+0.41</span> <span class="c">// momentum 1m +21.9%</span><br>
+<span class="a">[radar]</span> &nbsp;SNDK — ingresos <span class="v">+251%</span>, P/E 9 <span class="c">// 254 menciones en Reddit</span><br>
+<span class="c">[riesgo]</span> precio de protección calculado por posición<br>
+<span class="v">listo.</span> próxima señal: lunes <span class="cursor"></span>
+      </div>
+      <div class="grafico">
+        <svg viewBox="0 0 560 110" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="areaG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#3ef08c" stop-opacity=".22"/>
+              <stop offset="1" stop-color="#3ef08c" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path class="area" fill="url(#areaG)"
+            d="M0,92 L35,86 L70,90 L105,76 L140,81 L175,66 L210,72 L245,56 L280,63 L315,48 L350,55 L385,40 L420,47 L455,32 L490,37 L525,24 L560,18 L560,110 L0,110 Z"/>
+          <path class="linea" pathLength="1" fill="none" stroke="#3ef08c" stroke-width="2" stroke-linejoin="round"
+            d="M0,92 L35,86 L70,90 L105,76 L140,81 L175,66 L210,72 L245,56 L280,63 L315,48 L350,55 L385,40 L420,47 L455,32 L490,37 L525,24 L560,18"/>
+          <circle class="punto" cx="560" cy="18" r="4"/>
+        </svg>
+        <span class="grafico__label">señal compuesta · últimos 90 días</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Franja de fuentes -->
+<div class="fuentes" aria-label="Fuentes monitoreadas">
+  <span class="fuentes__label">monitoreando</span>
+  <div class="fuentes__mascara">
+    <div class="fuentes__pista">
+      <span>Yahoo Finance</span><span>Bloomberg</span><span>Reuters</span><span>WSJ</span><span>CNBC</span>
+      <span>MarketWatch</span><span>Motley Fool</span><span>Seeking Alpha</span><span>Investing.com</span>
+      <span>Benzinga</span><span>CoinDesk</span><span>Cointelegraph</span><span>Decrypt</span>
+      <span>Reddit</span><span>StockTwits</span><span>ApeWisdom</span>
+      <span>Yahoo Finance</span><span>Bloomberg</span><span>Reuters</span><span>WSJ</span><span>CNBC</span>
+      <span>MarketWatch</span><span>Motley Fool</span><span>Seeking Alpha</span><span>Investing.com</span>
+      <span>Benzinga</span><span>CoinDesk</span><span>Cointelegraph</span><span>Decrypt</span>
+      <span>Reddit</span><span>StockTwits</span><span>ApeWisdom</span>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <p class="sec-chip anim">// el pipeline</p>
+    <h2 class="sec-title anim">Del ruido a la señal, cada semana.</h2>
+    <div class="pipeline anim">
+      <div class="nodo"><b>17 fuentes</b><span>14 medios financieros + Reddit, StockTwits y ApeWisdom, más fundamentales y precios</span></div>
+      <div class="flujo"><i></i><i></i><i></i></div>
+      <div class="nodo nodo--core"><b>motor de señales</b><span>IA de lenguaje + señales cuantitativas + filtro de fundamentales</span></div>
+      <div class="flujo"><i></i><i></i><i></i></div>
+      <div class="nodo nodo--out"><b>tu correo</b><span>el portafolio modelo, en porcentajes, cada lunes 07:00</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <p class="sec-chip anim">// cómo funciona</p>
+    <h2 class="sec-title anim">Tu análisis corre 24/7. Tú inviertes 10 minutos.</h2>
+    <div class="pasos">
+      <div class="paso anim"><span class="num">01</span><b>La IA procesa el mercado</b><p>Precios de 39 activos, titulares de 14 medios financieros — Bloomberg, Reuters, WSJ, Yahoo, CNBC entre ellos —, hilos de Reddit, sentimiento de StockTwits y fundamentales de cada empresa. Todo puntuado en un solo score por activo.</p></div>
+      <div class="paso anim"><span class="num">02</span><b>Recibes el plan cada lunes</b><p>La distribución exacta — un núcleo estable más las mejores señales de la semana — con montos proporcionales a lo que tú inviertas, precio y razón de cada orden.</p></div>
+      <div class="paso anim"><span class="num">03</span><b>Ejecutas en tu broker</b><p>GBM+, Bitso o el que uses. Tu dinero nunca pasa por nosotros. Y si una señal se rompe entre semana, te llega la alerta al momento.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <p class="sec-chip anim">// el stack</p>
+    <h2 class="sec-title anim">Lo que corre debajo de cada señal.</h2>
+    <div class="grid">
+      <div class="card anim"><span class="tag">nlp / llm</span><h3>Noticias leídas por IA</h3><p>Cada titular pasa por un modelo de lenguaje que extrae sentimiento, activos afectados y relevancia. Sin sesgos de un analista con prisa.</p></div>
+      <div class="card anim"><span class="tag">social intel <i class="radar-mini"></i></span><h3>Radar de atención</h3><p>Detectamos qué activos concentran conversación en Reddit y StockTwits antes de que lleguen a los titulares — y los filtramos con fundamentales para separar hype de sustancia.</p></div>
+      <div class="card anim"><span class="tag">quant</span><h3>Señales cuantitativas</h3><p>Momentum multi-horizonte, tendencia, RSI y pronóstico de volatilidad. Cada activo recibe un score compuesto y auditable.</p>
+        <div class="barras" aria-hidden="true"><i style="--v:.45"></i><i style="--v:.62"></i><i style="--v:.38" class="neg"></i><i style="--v:.75"></i><i style="--v:.55"></i><i style="--v:.3" class="neg"></i><i style="--v:.85"></i><i style="--v:.68"></i></div></div>
+      <div class="card anim"><span class="tag">risk engine</span><h3>Salidas automáticas</h3><p>Cada orden incluye su precio de protección calculado por volatilidad. Cuando se rompe, recibes la alerta — la disciplina no depende de tu fuerza de voluntad.</p></div>
+      <div class="card anim"><span class="tag">track record</span><h3>Historial verificable</h3><p>Cada señal se evalúa sola contra el S&amp;P 500 y el resultado se publica: porcentaje de aciertos, retornos, errores incluidos. Números, no promesas.</p></div>
+      <div class="card anim"><span class="tag">mx native</span><h3>Diseñado para México</h3><p>Montos en pesos, tipo de cambio del día, instrucciones para GBM+ y Bitso. Escala a cualquier monto: el plan es proporcional.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="sec-chip anim" style="color:var(--rojo)">// disclosure</p>
+    <h2 class="sec-title anim">Léelo antes de pagar. En serio.</h2>
+    <div class="honesto">
+      <div class="anim"><span class="no">no somos</span><b>Asesores registrados</b>Esta es una publicación educativa con análisis general de mercado: la misma información para todos. No es asesoría personalizada ni recomendación individualizada — para eso existen los asesores registrados ante la CNBV.</div>
+      <div class="anim"><span class="no">no hay</span><b>Rendimientos garantizados</b>Nadie puede garantizarlos. Quien lo haga, te está mintiendo. Nuestro historial es público y habrá semanas malas. El rendimiento pasado no asegura el futuro.</div>
+      <div class="anim"><span class="no">no tocamos</span><b>Tu dinero</b>Jamás te pediremos transferencias, contraseñas ni que inviertas "con nosotros". Todo ocurre en tu broker, bajo tu control y tu propio riesgo.</div>
+    </div>
+  </div>
+</section>
+
+<section id="precio" style="padding-top:1rem">
+  <div class="wrap">
+    <p class="sec-chip anim" style="text-align:center">// acceso</p>
+    <h2 class="sec-title anim" style="text-align:center;margin-inline:auto">Un año de señales. Un solo pago.</h2>
+    <div class="precio-card anim">
+      <p class="plan">acceso anual</p>
+      <div class="monto">$10 <small>MXN / semana</small></div>
+      <p style="font-family:var(--mono);font-size:.72rem;color:var(--gris)">un solo pago de $520 MXN al año</p>
+      <ul>
+        <li>Plan de inversión cada lunes — 52 entregas</li>
+        <li>Alertas entre semana cuando algo importa</li>
+        <li>Radar de atención social con fundamentales</li>
+        <li>Señales de salida y precios de protección</li>
+        <li>Historial del modelo, público y auditable</li>
+      </ul>
+      <a class="btn" href="https://mpago.la/2porta3" rel="noopener">Obtener acceso</a>
+      <p class="garantia">Tras el pago, tu correo entra a la lista y recibes el primer plan el lunes siguiente.
+      Si en el primer mes no te sirve, escríbenos y te devolvemos tu dinero.</p>
+    </div>
+  </div>
+</section>
+
+<section class="faq" style="padding-top:0">
+  <div class="wrap" style="max-width:700px">
+    <p class="sec-chip anim">// faq</p>
+    <h2 class="sec-title anim">Lo que seguro te estás preguntando</h2>
+    <details class="anim"><summary>¿Necesito saber de inversiones?</summary><p>No. Cada correo te dice qué, cuánto, dónde y por qué, en español claro. Si sabes hacer una transferencia, puedes seguir el plan.</p></details>
+    <details class="anim"><summary>¿Con cuánto dinero funciona?</summary><p>Con el que tengas. El plan se expresa en porcentajes y montos de referencia: si inviertes quinientos pesos o cincuenta mil a la semana, solo ajustas proporcional.</p></details>
+    <details class="anim"><summary>¿En qué broker funciona?</summary><p>Las instrucciones vienen para GBM+ (acciones y ETFs) y Bitso (cripto), pero sirven en cualquier broker con acceso al mercado estadounidense.</p></details>
+    <details class="anim"><summary>¿Y si el modelo se equivoca?</summary><p>Se va a equivocar — por eso la mayor parte va a un índice de largo plazo y cada jugada trae precio de salida. El historial completo es público: aciertos y errores.</p></details>
+    <details class="anim"><summary>¿Cómo cancelo?</summary><p>Es un pago único por doce meses, sin renovación automática. Si no quieres seguir, simplemente no renuevas.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="assets/malmercado_logo.png" alt="Mal Mercado" style="height:72px;border-radius:10px;margin-bottom:1rem;display:block">
+    <span class="marca">mal<b>_</b>mercado</span>
+    <p><b>Aviso importante:</b> Mal Mercado es contenido educativo e informativo de análisis general de mercados. No constituye asesoría de inversión personalizada, recomendación individualizada ni oferta de valores. No somos asesores en inversiones registrados ante la CNBV. Invertir implica riesgo de pérdida, incluida la pérdida total del capital. Los rendimientos pasados no garantizan rendimientos futuros. Cada suscriptor es responsable de sus propias decisiones de inversión.</p>
+    <p style="margin-top:.9rem">© 2026 Mal Mercado</p>
+  </div>
+</footer>
+
+<script>
+// Revelado al hacer scroll
+const obs = new IntersectionObserver(entradas => {
+  entradas.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('section .anim').forEach(el => obs.observe(el));
+
+// Contadores animados de las estadísticas
+const animarContador = el => {
+  const fin = parseInt(el.dataset.fin, 10);
+  const dur = 1400, t0 = performance.now();
+  const paso = t => {
+    const p = Math.min((t - t0) / dur, 1);
+    el.textContent = Math.round(fin * (1 - Math.pow(1 - p, 3)));
+    if (p < 1) requestAnimationFrame(paso);
+  };
+  requestAnimationFrame(paso);
+};
+const obsCnt = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) { animarContador(e.target); obsCnt.unobserve(e.target); } });
+}, { threshold: 0.5 });
+document.querySelectorAll('.cnt').forEach(el => obsCnt.observe(el));
+</script>
+
+</body>
+</html>
