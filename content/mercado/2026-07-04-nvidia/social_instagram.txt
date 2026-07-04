@@ -1,1 +1,9 @@
-Las señales del mercado sobre NVIDIA esta semana no apuntan en una sola dirección. Hay salidas de capital en Estados Unidos que no se veían en meses, caídas en semiconductores desde los mercados asiáticos y una recalibración de expectativas sobre la rentabilidad real de la IA. Al mismo tiempo, empresas de telecomunicaciones siguen construyendo sobre infraestructura de NVIDIA, lo que muestra que la demanda del sector no desapareció. Entender la diferencia entre ruido de corto plazo y tendencias de fondo es lo que cambia el análisis. El desglose completo está en el blog de Mal Mercado, enlace en bio. #NVIDIA #Semiconductores #InteligenciaArtificial #MercadosFinancieros #AnalisisTecnico #MalMercado #TechStocks
+Las señales del mercado no siempre apuntan en la misma dirección, y esta semana NVIDIA es el ejemplo más claro de eso.
+
+Por un lado: caídas abruptas en acciones de semiconductores en Japón, salidas de fondos institucionales en Estados Unidos en máximos de tres meses y dudas crecientes sobre la rentabilidad real de la inversión en infraestructura de IA.
+
+Por otro: Amdocs, 1Finity y Supermicro validan juntas el esquema AI-RAN construido sobre hardware de NVIDIA, y los equipos de fabricación de chips lideran alzas en Europa, señal que el mercado suele asociar con demanda futura sostenida.
+
+Leer las dos caras al mismo tiempo es lo que permite seguir este activo con criterio. El análisis completo en el enlace del perfil.
+
+#MalMercado #NVIDIA #Semiconductores #MercadosFinancieros #InteligenciaArtificial #AnalisisDeInversión #TechStocks

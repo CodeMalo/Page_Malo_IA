@@ -1,1 +1,3 @@
-NVIDIA y los semiconductores: señales contradictorias que el mercado no puede ignorar | Las señales del mercado para NVIDIA esta semana son mixtas: capital saliendo de acciones estadounidenses, caídas abruptas en semiconductores desde Japón y Asia, pero con validaciones de infraestructura real en telecomunicaciones y tecnología. El análisis completo está en Mal Mercado. Enlace en descripción.
+NVIDIA bajo presión: qué observan las señales del mercado hoy | Mal Mercado
+
+Esta semana, las señales del mercado global muestran una tensión clara en torno a NVIDIA y el sector de semiconductores. Flujos de salida institucionales en máximos de tres meses, caídas abruptas en bolsas de Japón y dudas sobre la rentabilidad real de la infraestructura de IA conviven con una noticia diferente: nuevas alianzas tecnológicas validan la arquitectura AI-RAN de NVIDIA. El análisis completo está en Mal Mercado. Enlace en descripción.

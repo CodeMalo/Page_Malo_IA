@@ -143,6 +143,36 @@ def make_image(title, section, topic_hint, out_path, references=None, brief=None
     raise RuntimeError("Gemini no devolvió imagen.")
 
 
+def make_illustration(brief, out_path):
+    """Ilustración editorial con Gemini (Nano Banana) a partir de un brief de
+    texto. SIN referencias, SIN BIX (es para Mal Mercado, no malo_ia). En MOCK
+    (sin GEMINI_API_KEY) devuelve None: el build sigue sin ilustración y el caché
+    la incorpora cuando corras con key."""
+    out_path = Path(out_path)
+    if out_path.exists() and not _REGEN:
+        return str(out_path)
+    if IMAGE_MOCK:
+        return None
+
+    from io import BytesIO
+    from google import genai
+    from google.genai import types
+    from PIL import Image
+
+    client = genai.Client()
+    resp = client.models.generate_content(
+        model=GEMINI_IMAGE_MODEL, contents=[brief],
+        config=types.GenerateContentConfig(response_modalities=["IMAGE"]),
+    )
+    for part in resp.candidates[0].content.parts:
+        inline = getattr(part, "inline_data", None)
+        if inline and inline.data:
+            out_path.parent.mkdir(parents=True, exist_ok=True)
+            Image.open(BytesIO(inline.data)).convert("RGB").save(out_path, quality=92)
+            return str(out_path)
+    return None
+
+
 def make_bix(topic_hint, out_path):
     """Genera a BIX en pose/disfraz del tema (Gemini), lo recorta del chroma verde
     y lo guarda como PNG con transparencia. Devuelve la ruta, o None en MOCK

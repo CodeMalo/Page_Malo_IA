@@ -418,7 +418,27 @@ def handle_mercado(item, cfg):
         mm_cover.render(title, cover_abs, kicker=meta.get("kicker", "SEÑAL DEL MERCADO"),
                         tickers=cinta)
 
-    # 3) Copys por red (para el email matutino). Español, sin emojis, sin imperativos.
+    # 3) Ilustración editorial (Gemini / Nano Banana), estética Mal Mercado, sin
+    #    BIX ni texto. Se teje dentro del artículo (app.js reparte item.images).
+    images = []
+    ilus_rel = f"public/media/mercado/{slug}-ilustracion.png"
+    ilus_abs = PUBLIC / "media" / "mercado" / f"{slug}-ilustracion.png"
+    brief_ilus = (
+        f"Editorial financial illustration for a markets article titled '{title}'. "
+        f"Theme: {topic}. Style: premium dark fintech, deep near-black background "
+        f"(#0b0d10), electric mint-green accent (#3ef08c), subtle violet secondary. "
+        f"Abstract and data-driven: candlestick charts, glowing trend lines, network "
+        f"nodes, depth and soft glow. NO text, NO words, NO letters, NO human faces, "
+        f"NO logos, NO watermarks. Clean, sophisticated, cinematic. Wide 16:9 composition."
+    )
+    try:
+        got = providers.make_illustration(brief_ilus, ilus_abs)
+        if got:
+            images.append(ilus_rel)
+    except Exception as e:
+        print(f"  (no se pudo generar la ilustración: {e})")
+
+    # 4) Copys por red (para el email matutino). Español, sin emojis, sin imperativos.
     social = mm_social(d, title, txt.get("summary", ""), body_md, cfg)
 
     tags = txt.get("tags") if isinstance(txt.get("tags"), list) else []
@@ -429,7 +449,7 @@ def handle_mercado(item, cfg):
         "cover": cover_rel,
         "accent": "#3ef08c",
         "body": body_md,
-        "images": [],
+        "images": images,
         "sources": sources,
         "read_min": read_min,
         "category": txt.get("category", "Mercados"),
