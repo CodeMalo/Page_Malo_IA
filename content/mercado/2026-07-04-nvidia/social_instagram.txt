@@ -1,9 +1,5 @@
-Las señales del mercado no siempre apuntan en la misma dirección, y esta semana NVIDIA es el ejemplo más claro de eso.
+NVIDIA en el foco: qué observan las señales del mercado
 
-Por un lado: caídas abruptas en acciones de semiconductores en Japón, salidas de fondos institucionales en Estados Unidos en máximos de tres meses y dudas crecientes sobre la rentabilidad real de la inversión en infraestructura de IA.
+NVIDIA en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.
 
-Por otro: Amdocs, 1Finity y Supermicro validan juntas el esquema AI-RAN construido sobre hardware de NVIDIA, y los equipos de fabricación de chips lideran alzas en Europa, señal que el mercado suele asociar con demanda futura sostenida.
-
-Leer las dos caras al mismo tiempo es lo que permite seguir este activo con criterio. El análisis completo en el enlace del perfil.
-
-#MalMercado #NVIDIA #Semiconductores #MercadosFinancieros #InteligenciaArtificial #AnalisisDeInversión #TechStocks
+Lee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.

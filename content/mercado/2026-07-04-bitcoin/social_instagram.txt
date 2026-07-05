@@ -1,9 +1,5 @@
-Bitcoin muestra dos señales que apuntan en direcciones opuestas al mismo tiempo.
+Bitcoin en el foco: qué observan las señales del mercado
 
-Por un lado, el ratio de ganancias realizadas frente a pérdidas realizadas cayó a su nivel más bajo en 43 meses. Una lectura que el análisis en cadena asocia con presión vendedora sostenida.
+Bitcoin en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.
 
-Por otro, una métrica de oferta acaba de generar su primera señal técnica positiva desde finales de 2022, la misma que históricamente ha precedido recuperaciones de precio.
-
-El análisis completo está en el blog de Mal Mercado. Enlace en bio.
-
-#Bitcoin #CriptoAnalisis #MercadoCripto #OnChain #BTCAnalisis #MalMercado #CriptoLatam
+Lee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.

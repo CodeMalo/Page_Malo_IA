@@ -1,5 +1,5 @@
-El mercado de Bitcoin atraviesa uno de esos momentos en que los indicadores no hablan con una sola voz. El ratio de ganancias realizadas frente a pérdidas realizadas acaba de marcar su nivel más bajo en 43 meses, una señal que los analistas en cadena asocian con presión a la baja prolongada. La última vez que estuvo en ese nivel, el mercado atravesaba una de sus fases más difíciles.
+Bitcoin en el foco: qué observan las señales del mercado
 
-Al mismo tiempo, una métrica distinta, la que analiza cómo se distribuye la oferta disponible de Bitcoin, registró su primera señal positiva desde 2022. Esto ocurre mientras el precio alcanzó los 62.300 dólares, su máximo en nueve días, en un contexto donde los mercados globales de acciones batieron récords históricos.
+Bitcoin en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.
 
-Entender qué observa cada señal, y qué no garantiza ninguna, es parte del análisis completo publicado en Mal Mercado: https://codemalo.github.io/Page_Malo_IA/mercado.html
+Lee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.

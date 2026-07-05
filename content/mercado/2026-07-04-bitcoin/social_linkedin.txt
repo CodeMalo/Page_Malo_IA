@@ -1,5 +1,5 @@
-El análisis técnico en cadena de Bitcoin presenta esta semana una situación poco común: dos indicadores relevantes ofrecen lecturas contradictorias de forma simultánea. El ratio de ganancias realizadas frente a pérdidas realizadas cayó a su nivel más bajo en 43 meses, una señal que los analistas asocian con presión vendedora acumulada y participantes moviendo Bitcoin con pérdidas o márgenes mínimos. No es un dato menor: la última vez que el indicador estuvo en ese nivel, el mercado atravesaba una de sus etapas más adversas.
+Bitcoin en el foco: qué observan las señales del mercado
 
-Al mismo tiempo, una métrica de distribución de oferta generó su primera señal técnica positiva desde finales de 2022, la misma que históricamente ha precedido recuperaciones de precio. Esto ocurre mientras el precio alcanza máximos de nueve días y los flujos hacia ETFs de Bitcoin al contado en Estados Unidos muestran compras renovadas.
+Bitcoin en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.
 
-El entorno regulatorio, el posicionamiento político en Washington y la tensión entre narrativa maximalista y comportamiento institucional completan un cuadro que vale la pena leer con detenimiento. Análisis completo en Mal Mercado: https://codemalo.github.io/Page_Malo_IA/mercado.html
+Lee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.

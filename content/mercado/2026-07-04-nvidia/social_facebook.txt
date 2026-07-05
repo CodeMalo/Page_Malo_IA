@@ -1,5 +1,5 @@
-Esta semana, NVIDIA aparece en los titulares de mercados de Japón, China, Europa y Estados Unidos al mismo tiempo, pero no siempre con el mismo tono.
+NVIDIA en el foco: qué observan las señales del mercado
 
-Las señales de corto plazo muestran presión real: salidas de fondos institucionales en máximos de más de tres meses según datos de Bank of America, caídas abruptas en acciones de semiconductores y expectativas de recorte de tasas que siguen retrocediendo, encareciendo el financiamiento para empresas de alto crecimiento.
+NVIDIA en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.
 
-Al mismo tiempo, los fundamentales del negocio avanzan. Tres empresas de segmentos distintos validaron esta semana el esquema AI-RAN sobre infraestructura de NVIDIA, y los equipos de fabricación de chips lideraron alzas en mercados europeos, señal que históricamente anticipa demanda futura. El análisis completo está disponible en Mal Mercado: https://codemalo.github.io/Page_Malo_IA/mercado.html
+Lee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.
