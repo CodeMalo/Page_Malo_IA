@@ -16,12 +16,7 @@
   "sections": {
     "guias": { "label": "Guides & templates", "page": "guias.html" },
     "memes": { "label": "Videos & memes", "page": "memes.html" },
-    "blog":  { "label": "Blog", "page": "blog.html" },
-    "mercado": { "label": "Mal Mercado", "page": "mercado.html" }
-  },
-  "mercado": {
-    "blog_url": "https://codemalo.github.io/Page_Malo_IA/mercado.html",
-    "funnel_url": "patrimonio.html"
+    "blog":  { "label": "Blog", "page": "blog.html" }
   },
   "carousel": { "title": "What's new", "max_items": 8 },
   "analytics": { "ga4_id": "G-9X4W5XDK38" }

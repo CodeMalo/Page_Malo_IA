@@ -11,11 +11,10 @@
     guias: "Guides & templates",
     memes: "Videos & memes",
     blog:  "Blog",
-    mercado: "Mal Mercado",
   };
 
   // Tipos que se leen como artículo (abren post.html)
-  const isArticle = (t) => t === "blog" || t === "mercado";
+  const isArticle = (t) => t === "blog";
 
   const esc = (s) => String(s == null ? "" : s)
     .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -201,8 +200,7 @@
     } else if (item.type === "memes") {
       actions = memeShareHTML(item);
     } else if (isArticle(item.type)) {
-      const label = item.type === "mercado" ? "Leer →" : "Read →";
-      actions = `<a class="btn btn--primary" href="post.html?id=${encodeURIComponent(item.id)}">${label}</a>`;
+      actions = `<a class="btn btn--primary" href="post.html?id=${encodeURIComponent(item.id)}">Read →</a>`;
     }
 
     const text = item.summary ? `<p class="card__text">${esc(item.summary)}</p>` : "";
@@ -283,7 +281,7 @@
       const item = items.find((x) => x.id === id) || null;
       const root = document.querySelector("#malo-article");
       if (!item) { root.innerHTML = `<div class="empty">Post not found.</div>`; return; }
-      document.title = `${item.title} — ${item.type === "mercado" ? "Mal Mercado" : "malo_ia"}`;
+      document.title = `${item.title} — malo_ia`;
       const cover = item.cover ? `<img class="article__cover" src="${esc(item.cover)}" alt="${esc(item.title)}">` : "";
       const meta = [item.date, item.read_min ? `${item.read_min} min read` : ""].filter(Boolean).join(" · ");
       const sources = (item.sources || []).length
@@ -340,7 +338,7 @@
     }
     const prev = document.querySelector("#malo-previews");
     if (prev) {
-      ["mercado", "guias", "memes", "blog"].forEach((sec) => {
+      ["guias", "memes", "blog"].forEach((sec) => {
         const mine = items.filter((i) => i.type === sec).slice(0, 3);
         if (!mine.length) return;
         const page = sectionPage(cfg, sec);

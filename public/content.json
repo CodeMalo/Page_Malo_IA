@@ -27,15 +27,7 @@
       "blog": {
         "label": "Blog",
         "page": "blog.html"
-      },
-      "mercado": {
-        "label": "Mal Mercado",
-        "page": "mercado.html"
       }
-    },
-    "mercado": {
-      "blog_url": "https://codemalo.github.io/Page_Malo_IA/mercado.html",
-      "funnel_url": "patrimonio.html"
     },
     "carousel": {
       "title": "What's new",
@@ -46,112 +38,6 @@
     }
   },
   "items": [
-    {
-      "id": "2026-07-04-nvidia",
-      "type": "mercado",
-      "title": "NVIDIA en el foco: qué observan las señales del mercado",
-      "date": "2026-07-04",
-      "summary": "NVIDIA en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.",
-      "cover": "public/media/mercado/2026-07-04-nvidia.png",
-      "accent": "#3ef08c",
-      "body": "Noticias detectadas por el motor de Mal Mercado (fuentes de todo el mundo, ya traducidas y analizadas). Úsalas como material para el artículo:\n\n- [Japón] 米国株、AIブームの見通しに不安 S&P500週次反発 半導体株は急落 - ig.com\n  sentimiento -0.30 (negativo). Incertidumbre sobre perspectivas boom IA en EE.UU.; acciones semiconductoras caen abruptamente.\n- [Japón] グローバル株式市場動向(2026年6月)－AI投資の収益懸念や米国の利下げ期待後退から反落 - nli-research.co.jp\n  sentimiento -0.30 (negativo). Preocupaciones sobre rentabilidad inversión IA y fin expectativas de baja tasas; caída.\n- [China] 资金重返AI算力主题！半导体设备引领欧洲股市再创新高 韩国存储双雄从ICU直奔KTV - 同花顺财经\n  sentimiento +0.40 (positivo). Capital retorna a AI compute, equipos semiconductores lideran Europa; SK Hynix se recupera.\n- [China] AI硬件全线“崩塌” 原因找到了！股民：刚切到科技两天就被套了18% - 东方财富\n  sentimiento -0.50 (negativo). Hardware AI se desmorona; inversores perden 18% después de entrar hace 2 días.\n- [Yahoo Finance] Amdocs, (DOX), 1Finity, Supermicro (SMCI) Validate AI-RAN Blueprint with NVIDIA (NVDA) Infrastructure\n  sentimiento +0.60 (positivo). Amdocs, 1Finity y Supermicro validan blueprint AI-RAN con infraestructura de NVIDIA.\n- [Bloomberg] US Stocks Post Largest Outflows in Over Three Months, BofA Says - Bloomberg.com\n  sentimiento -0.40 (negativo). Mayores salidas de fondos en acciones de EE.UU., indica rotación fuera de tech.\n\n---\n\n*Mal Mercado es contenido educativo e informativo de análisis general de mercados: la misma información para todos los lectores. No es asesoría de inversión personalizada ni recomendación individualizada; no somos asesores registrados ante la CNBV. Invertir implica riesgo de pérdida. Los rendimientos pasados no garantizan rendimientos futuros. Cada quien es responsable de sus propias decisiones.*",
-      "images": [
-        "public/media/mercado/2026-07-04-nvidia-ilustracion.png"
-      ],
-      "sources": [
-        "https://news.google.com/rss/articles/CBMirAFBVV95cUxQRERjTzNQY1ZiOU9wb1ZIR244V1NpSlNpT0tJN19OYjVqOWcxWVRVWU01UzlpWVZ1dmNTa25pRThCdVF4N1FieUpQU29SaDJ2N0g5ZDBpSGE1SzEzc3lwaFNXcDFIWEZxX25UcUIyc0pVSGxNMENwWHpFak4xVmZxN1dwUlMwcmItVlBvTmp2WWpDYzR6VU5BMjBvZkFPcVl2M1UxOGlOY2NlM2g3?oc=5",
-        "https://news.google.com/rss/articles/CBMib0FVX3lxTE9EQnBqREtUXzFsZnNMTy14dDdmc3FCdXNoSXhFcFdDcnFWTUcwZ0hfdWstcl9yS3VSekowOGNlNS1ucWVCZmJPRFpHaEZQZ3FQaFlsMU9OdjczTFlPd09zRnluVks5LTNhOThaYkxLNNIBf0FVX3lxTE5NbE5FanNlbUZEWlB0YkhHeFJOODhhbWJzZW9KRURqaUZ1R3cwTTluVWpEMUttNEpLamozX3plUVh0LVVkOHJtdVZ6ei1BLTNfV3hpQUM5LXYtTXZxVFZJenJQMkh6VGRaNkMxY1hKRHVRWWhDaGtEankxVjlpY0E?oc=5",
-        "https://news.google.com/rss/articles/CBMiYkFVX3lxTE4xTmkyeU1ON1RTREFKTGlRb2F2VU5JQlg0cVRWYkVIdmdGOVZ4ZE9DUXZHZlpmeXZFekxreFZwVkhNUTRaQnctWU54Z00xS0p4LTV6bDB4bTlFYzJfSTVCM2N3?oc=5",
-        "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5iRzBEOERxcHFCem9pSWF4WlI4UURVaWVKUkpCNGtadzFFM09PNWx0T0xUMEFDcWdFN2FyVHZLcTFHaWdPNF9lMHhMM3owQ2k4WGl0MXhucjhSN2xMZXkyQQ?oc=5",
-        "https://finance.yahoo.com/technology/ai/articles/amdocs-dox-1finity-supermicro-smci-221252522.html",
-        "https://news.google.com/rss/articles/CBMiswFBVV95cUxOY0RtcDJFVWdQXzJLazU1TTZzV1laRnVpT3p2Y1ZpblU2V2hnRWlQS3hnSk9xS0FzS1F3YVlSOXpEZXgxOUc5NUxVMEVyMjVjb3B2VWY5Z2phdTVZcVkyN0dJNU1lVzNuUXdlZFNPU1RiNWRYRU95cEg0X3lXNHhtUXRTb01sMVIwQjRISGtlWkR2UW03WlZpbExhS2w3UWRXa0piRXJwa0J6ell0T0hETHRXUQ?oc=5"
-      ],
-      "read_min": 1,
-      "category": "Mercados",
-      "tags": [
-        "NVDA"
-      ],
-      "social": {
-        "youtube": "NVIDIA en el foco: qué observan las señales del mercado\n\nNVIDIA en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "instagram": "NVIDIA en el foco: qué observan las señales del mercado\n\nNVIDIA en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "facebook": "NVIDIA en el foco: qué observan las señales del mercado\n\nNVIDIA en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "tiktok": "NVIDIA en el foco: qué observan las señales del mercado\n\nNVIDIA en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "x": "NVIDIA en el foco: qué observan las señales del mercado\n\nNVIDIA en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "threads": "NVIDIA en el foco: qué observan las señales del mercado\n\nNVIDIA en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "linkedin": "NVIDIA en el foco: qué observan las señales del mercado\n\nNVIDIA en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html."
-      }
-    },
-    {
-      "id": "2026-07-04-mercado",
-      "type": "mercado",
-      "title": "Los mercados esta semana: qué observan las señales",
-      "date": "2026-07-04",
-      "summary": "Los mercados esta semana: qué observan las señales: qué observan las señales del mercado, explicado claro.",
-      "cover": "public/media/mercado/2026-07-04-mercado.png",
-      "accent": "#3ef08c",
-      "body": "Noticias detectadas por el motor de Mal Mercado (fuentes de todo el mundo, ya traducidas y analizadas). Úsalas como material para el artículo:\n\n- [Japón] 日経平均株価の指数情報・推移 - Yahoo!ファイナンス\n  sentimiento +0.00 (neutral). Índice Nikkei 225; titular sin contenido específico.\n- [Japón] 個人投資家が株式市場の主役に、AI相場で揺らぐ常識－戦略見直す年金基金 - TBS NEWS DIG\n  sentimiento +0.20 (positivo). Inversores individuales son protagonistas, mercado IA desafía convenciones; revisión de estrategias.\n- [Japón] 個人投資家が株式市場の主役に、AI相場で揺らぐ常識－戦略見直す年金基金 - Bloomberg.com\n  sentimiento +0.20 (positivo). Inversores individuales dominan, mercado IA cuestiona normas; fondos de pensiones revisan.\n- [Japón] 【見通し】NY株見通しー今晩のNY株式市場は休場（独立記念日の振替休日） - 外為どっとコム\n  sentimiento +0.00 (neutral). Mercado NY en vacaciones por Día de la Independencia; sin trading hoy.\n- [Cointelegraph] Here’s what happened in crypto today\n  sentimiento +0.00 (neutral). Resumen general de criptomonedas sin dirección específica.\n- [Cointelegraph] US law enforcement group drops opposition to CLARITY Act: Report\n  sentimiento +0.30 (positivo). Grupo de aplicación de ley retira oposición a CLARITY Act; positivo para regulación cripto.\n\n---\n\n*Mal Mercado es contenido educativo e informativo de análisis general de mercados: la misma información para todos los lectores. No es asesoría de inversión personalizada ni recomendación individualizada; no somos asesores registrados ante la CNBV. Invertir implica riesgo de pérdida. Los rendimientos pasados no garantizan rendimientos futuros. Cada quien es responsable de sus propias decisiones.*",
-      "images": [
-        "public/media/mercado/2026-07-04-mercado-ilustracion.png"
-      ],
-      "sources": [
-        "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5SRDk1ZENIQUIzSUZyMHZRNHpCR2xlcTI5UTJRYXVoMDBrM3BmNndBT29vV0dDZWdQazZHb2tURGZNYy1OMU93R0kyUUZUT3VmU2VhbA?oc=5",
-        "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE0waGJDeUpmeDhrQ3U5c085RzlUaF9UYThFc29hR3QzSGpBX2UzWXNjaWt4dVJmcDVDTEthckJ4ZDk3RV9GVGNjU1BpVmpocjIxMmVBZldzU1ozdlJYRGc5a1kwMDFsUzA?oc=5",
-        "https://news.google.com/rss/articles/CBMijAFBVV95cUxPRUNMMDNhYWFWX1d4cGRSUXFseTF1dUNSeFVPeXItVzhLV3h2bGlNUVBOVk5FaDNRWkl4WGNEYkpZdldUNV80c0twSk94bXM2ZWRxa0R3bC1Ub2ZtR1dDOTRQcGV5cDF0X0xfNVlieWFUV0NuNy1tR3diVEh4Y3d1bER3UTV5T1AzVmdlSw?oc=5",
-        "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9QY2RFVjZIWFk0NGpCQVRZbmVlbXdobDVsNGc1T3dOam5wUmRqYWwyaXN4ZVBTUUt4QUZsUlhQaXgyNWZsX2UyS2QzTDJONFh4ZXdWenoxTi11MEYzbEtwM1Babw?oc=5",
-        "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-        "https://cointelegraph.com/news/us-law-enforcement-group-drops-opposition-to-clarity-act?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound"
-      ],
-      "read_min": 1,
-      "category": "Mercados",
-      "tags": [
-        "mercados",
-        "inversión"
-      ],
-      "social": {
-        "youtube": "Los mercados esta semana: qué observan las señales\n\nLos mercados esta semana: qué observan las señales: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "instagram": "Los mercados esta semana: qué observan las señales\n\nLos mercados esta semana: qué observan las señales: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "facebook": "Los mercados esta semana: qué observan las señales\n\nLos mercados esta semana: qué observan las señales: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "tiktok": "Los mercados esta semana: qué observan las señales\n\nLos mercados esta semana: qué observan las señales: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "x": "Los mercados esta semana: qué observan las señales\n\nLos mercados esta semana: qué observan las señales: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "threads": "Los mercados esta semana: qué observan las señales\n\nLos mercados esta semana: qué observan las señales: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "linkedin": "Los mercados esta semana: qué observan las señales\n\nLos mercados esta semana: qué observan las señales: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html."
-      }
-    },
-    {
-      "id": "2026-07-04-bitcoin",
-      "type": "mercado",
-      "title": "Bitcoin en el foco: qué observan las señales del mercado",
-      "date": "2026-07-04",
-      "summary": "Bitcoin en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.",
-      "cover": "public/media/mercado/2026-07-04-bitcoin.png",
-      "accent": "#3ef08c",
-      "body": "Noticias detectadas por el motor de Mal Mercado (fuentes de todo el mundo, ya traducidas y analizadas). Úsalas como material para el artículo:\n\n- [Cointelegraph] Bitcoin profit and loss ratio falls to 43-month low\n  sentimiento -0.30 (negativo). Ratio de ganancias/pérdidas Bitcoin cae a mínimo de 43 meses; indicador bajista.\n- [Cointelegraph] Bitcoin, Ether extend relief rallies as extreme fear meets renewed ETF buying\n  sentimiento +0.40 (positivo). Bitcoin y Ethereum extienden rallies de alivio con compra de ETFs; sentimiento positivo.\n- [Cointelegraph] Donald Trump says ‘nothing wrong’ with $1.4B crypto windfall while in office\n  sentimiento +0.20 (positivo). Trump dice no hay nada malo en ganancia cripto de $1.4B; apoyo a criptomonedas.\n- [Cointelegraph] Crypto Biz: Bitcoin maximalism meets the realities of capital markets\n  sentimiento +0.00 (neutral). Análisis de Bitcoin maximalism vs mercados de capital; sin dirección clara.\n- [Cointelegraph] Bitcoin price tags $62.3K nine-day high after global stocks hit historic record\n  sentimiento +0.50 (positivo). Bitcoin sube a $62.3K máximo de 9 días mientras stocks globales alcanzan récord.\n- [Cointelegraph] Bitcoin supply metric prints first 'buy' signal since late 2022 as bear market continues\n  sentimiento +0.40 (positivo). Métrica de oferta Bitcoin imprime primera señal de compra desde fin 2022; positivo técnico.\n\n---\n\n*Mal Mercado es contenido educativo e informativo de análisis general de mercados: la misma información para todos los lectores. No es asesoría de inversión personalizada ni recomendación individualizada; no somos asesores registrados ante la CNBV. Invertir implica riesgo de pérdida. Los rendimientos pasados no garantizan rendimientos futuros. Cada quien es responsable de sus propias decisiones.*",
-      "images": [
-        "public/media/mercado/2026-07-04-bitcoin-ilustracion.png"
-      ],
-      "sources": [
-        "https://cointelegraph.com/news/bitcoin-realized-profit-loss-ratio-falls-to-lowest-level-since-2022-cryptoquant?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-        "https://cointelegraph.com/markets/bitcoin-ether-extend-relief-rallies-as-extreme-fear-meets-renewed-etf-buying?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-        "https://cointelegraph.com/news/donald-trump-crypto-investments-president-profit-office?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-        "https://cointelegraph.com/news/crypto-biz-bitcoin-maximalism-meets-capital-markets?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-        "https://cointelegraph.com/markets/bitcoin-price-tags-623k-nine-day-high-after-global-stocks-hit-historic-record?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-        "https://cointelegraph.com/markets/bitcoin-supply-metric-prints-first-buy-signal-since-late-2022-as-bear-market-continues?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound"
-      ],
-      "read_min": 1,
-      "category": "Mercados",
-      "tags": [
-        "BTC-USD"
-      ],
-      "social": {
-        "youtube": "Bitcoin en el foco: qué observan las señales del mercado\n\nBitcoin en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "instagram": "Bitcoin en el foco: qué observan las señales del mercado\n\nBitcoin en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "facebook": "Bitcoin en el foco: qué observan las señales del mercado\n\nBitcoin en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "tiktok": "Bitcoin en el foco: qué observan las señales del mercado\n\nBitcoin en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "x": "Bitcoin en el foco: qué observan las señales del mercado\n\nBitcoin en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "threads": "Bitcoin en el foco: qué observan las señales del mercado\n\nBitcoin en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html.",
-        "linkedin": "Bitcoin en el foco: qué observan las señales del mercado\n\nBitcoin en el foco: qué observan las señales del mercado: qué observan las señales del mercado, explicado claro.\n\nLee el análisis completo en https://codemalo.github.io/Page_Malo_IA/mercado.html."
-      }
-    },
     {
       "id": "2026-06-22-jeff-bezos-thinks-ai-wont-replace-humans-it-will",
       "type": "blog",
